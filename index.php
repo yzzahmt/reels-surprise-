@@ -5,7 +5,7 @@
 $config = [
     'default_name' => 'Dostum', // URL'de ?isim= parametresi yoksa kullanılacak varsayılan isim
     'video_url' => 'https://assets.mixkit.co/videos/preview/mixkit-cute-cat-looking-at-camera-31154-large.mp4', // Reels dikey videosu
-    'video_delay' => 7000, // Glitch ve sızma simülasyonu başlamadan önce videonun oynatılacağı süre (milisaniye)
+    'video_delay' => 3500, // Çöküş ve sızma simülasyonu başlamadan önce videonun oynatılacağı süre (milisaniye)
     'hacker_group' => 'ANONYMOUS_JOKER', // Terminalde görüntülenecek sahte grup adı
 ];
 
@@ -64,8 +64,8 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
         :root {
             --ig-primary-gradient: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
             --terminal-green: #39ff14;
-            --terminal-glow: rgba(57, 255, 20, 0.4);
-            --danger-red: #ff3040;
+            --danger-red: #ff2222;
+            --warning-yellow: #ffcc00;
         }
 
         * {
@@ -211,7 +211,7 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             letter-spacing: 0.5px;
         }
 
-        /* Sağ Butonlar Menüsü (Instagram Reels ile Birebir) */
+        /* Sağ Butonlar Menüsü */
         .reels-actions {
             position: absolute;
             right: 12px;
@@ -413,7 +413,7 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             object-fit: cover;
         }
 
-        /* --- GLITCH VE HACK EKRANI --- */
+        /* --- GLITCH VE CRASH EKRANI --- */
         .glitch-screen {
             position: absolute;
             top: 0;
@@ -426,7 +426,6 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             overflow: hidden;
         }
 
-        /* Ekran Parazit Efekti */
         .noise {
             position: absolute;
             top: 0;
@@ -434,7 +433,7 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             width: 100%;
             height: 100%;
             background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            opacity: 0.08;
+            opacity: 0.15;
             pointer-events: none;
             z-index: 51;
         }
@@ -445,249 +444,137 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             left: 0;
             width: 100%;
             height: 100%;
-            background: #111;
+            background: #0c0000;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            animation: screenShake 0.4s infinite;
+            animation: screenShake 0.2s infinite;
         }
 
         .glitch-static-text {
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 900;
-            color: #ff3838;
+            color: var(--danger-red);
             text-shadow: 2px 2px 0px #00fffa;
-            letter-spacing: 4px;
+            letter-spacing: 5px;
             text-transform: uppercase;
         }
 
-        /* Terminal Arayüzü */
-        .terminal-screen {
+        /* --- MAVİ EKRAN / TROJAN TESPİT ARAYÜZÜ --- */
+        .trojan-screen {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #050505;
+            background: #002b5c; /* Mavi Ekran Arka Planı */
             z-index: 60;
             display: none;
             flex-direction: column;
-            padding: 20px;
+            padding: 24px;
             font-family: 'JetBrains Mono', 'Courier New', monospace;
-            font-size: 12px;
-            line-height: 1.5;
-            color: var(--terminal-green);
-            text-shadow: 0 0 2px var(--terminal-glow);
             overflow-y: auto;
             scrollbar-width: none;
+            color: #fff;
         }
 
-        .terminal-screen::-webkit-scrollbar {
+        .trojan-screen::-webkit-scrollbar {
             display: none;
         }
 
-        .terminal-header {
-            border-bottom: 1px solid rgba(57, 255, 20, 0.3);
-            padding-bottom: 8px;
-            margin-bottom: 15px;
-            font-size: 11px;
-            display: flex;
-            justify-content: space-between;
-            color: rgba(57, 255, 20, 0.7);
+        .warning-header {
+            text-align: center;
+            border-bottom: 2px solid var(--danger-red);
+            padding-bottom: 12px;
+            margin-bottom: 20px;
         }
 
-        .terminal-line {
-            margin-bottom: 6px;
-            white-space: pre-wrap;
-            opacity: 0.9;
-        }
-
-        .terminal-line.info {
-            color: #00ffff;
-            text-shadow: 0 0 2px rgba(0, 255, 255, 0.4);
-        }
-
-        .terminal-line.danger {
+        .warning-title {
             color: var(--danger-red);
-            text-shadow: 0 0 2px rgba(255, 48, 64, 0.4);
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            animation: pulseText 1s infinite alternate;
+        }
+
+        .warning-subtitle {
+            color: var(--warning-yellow);
+            font-size: 14px;
+            font-weight: 700;
+            margin-top: 5px;
+            text-transform: uppercase;
+        }
+
+        .terminal-feed {
+            flex-grow: 1;
+            font-size: 11.5px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            white-space: pre-wrap;
+        }
+
+        .feed-line {
+            margin-bottom: 6px;
+        }
+        
+        .feed-line.trojan-name {
+            color: var(--danger-red);
             font-weight: bold;
         }
 
-        .terminal-line.success {
-            color: #ffeb3b;
-            text-shadow: 0 0 2px rgba(255, 235, 59, 0.4);
+        .feed-line.win-code {
+            color: var(--warning-yellow);
         }
 
-        .progress-bar-wrapper {
+        .feed-line.info {
+            color: #00ffcc;
+        }
+
+        .feed-line.success {
+            color: var(--terminal-green);
+        }
+
+        .progress-bar-container {
+            border: 1px solid #fff;
+            background: rgba(255, 255, 255, 0.1);
+            height: 14px;
+            width: 100%;
             margin: 10px 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .progress-bar-track {
-            flex-grow: 1;
-            height: 10px;
-            background: rgba(57, 255, 20, 0.1);
-            border: 1px solid var(--terminal-green);
             position: relative;
         }
 
         .progress-bar-fill {
+            background: var(--danger-red);
             height: 100%;
-            background: var(--terminal-green);
-            box-shadow: 0 0 8px var(--terminal-green);
             width: 0%;
-            transition: width 0.1s linear;
+            transition: width 0.05s linear;
         }
 
         .blink-cursor {
             display: inline-block;
             width: 8px;
             height: 14px;
-            background: var(--terminal-green);
+            background: #fff;
             animation: blink 0.8s infinite;
             vertical-align: middle;
         }
 
-        /* --- ŞAKA AÇIKLAMA EKRANI (PRANK REVEAL) --- */
-        .reveal-screen {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at top left, #120e2e, #06050f);
-            z-index: 100;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .reveal-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px;
-            padding: 25px 20px;
-            text-align: center;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            width: 100%;
-            max-width: 380px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 
-                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            animation: cardSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .emoji-avatar {
-            font-size: 56px;
-            margin-bottom: 15px;
-            display: inline-block;
-            animation: floatEmoji 3s ease-in-out infinite;
-        }
-
-        .reveal-title {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            background: linear-gradient(135deg, #ff7b00, #ff007b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .reveal-subtitle {
-            font-size: 15px;
-            font-weight: 600;
-            color: #d1d1d6;
-            margin-bottom: 18px;
-        }
-
-        .reveal-desc {
-            font-size: 13px;
-            color: #a1a1aa;
-            line-height: 1.5;
-            margin-bottom: 20px;
-            text-align: justify;
-        }
-
-        .data-box {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 12px;
-            margin-bottom: 22px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            text-align: left;
-            color: #818cf8;
-        }
-
-        .data-item {
-            margin-bottom: 4px;
+        /* Görünmez / Çok Silik Alt Not (Yasal Uyum ve Şaka Paylaşımı) */
+        .hidden-footer {
+            margin-top: auto;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             justify-content: space-between;
-        }
-        .data-item span {
-            color: #fff;
-        }
-
-        .share-box {
-            position: relative;
-            width: 100%;
-            margin-bottom: 15px;
-        }
-
-        .share-input {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 12px 100px 12px 12px;
-            color: #fff;
-            font-size: 12px;
-            font-family: inherit;
-            outline: none;
-        }
-
-        .copy-btn {
-            position: absolute;
-            right: 5px;
-            top: 5px;
-            bottom: 5px;
-            background: var(--ig-primary-gradient);
-            border: none;
-            border-radius: 8px;
-            color: #fff;
-            font-size: 11px;
-            font-weight: 600;
-            padding: 0 15px;
+            font-size: 9px;
+            color: rgba(255, 255, 255, 0.15); /* Çok silik renk */
             cursor: pointer;
-            transition: opacity 0.2s;
+            transition: color 0.3s;
         }
 
-        .copy-btn:hover {
-            opacity: 0.9;
-        }
-
-        .btn-restart {
-            width: 100%;
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 12px;
-            color: #fff;
-            padding: 12px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .btn-restart:hover {
-            background: rgba(255, 255, 255, 0.05);
+        .hidden-footer:hover {
+            color: rgba(255, 255, 255, 0.7); /* Üstüne gelince okunabilir olur */
         }
 
         /* --- ANIMASYONLAR --- */
@@ -695,6 +582,11 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,255,255,0.4); }
             70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(255,255,255,0); }
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+        }
+
+        @keyframes pulseText {
+            0% { transform: scale(0.98); opacity: 0.8; }
+            100% { transform: scale(1.02); opacity: 1; }
         }
 
         @keyframes rotate {
@@ -709,26 +601,14 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
 
         @keyframes screenShake {
             0% { transform: translate(0, 0) rotate(0deg); }
-            20% { transform: translate(-3px, 2px) rotate(-1deg); }
-            40% { transform: translate(2px, -1px) rotate(1deg); }
-            60% { transform: translate(-1px, 2px) rotate(0deg); }
-            80% { transform: translate(2px, 1px) rotate(-1deg); }
+            25% { transform: translate(-4px, 3px) rotate(-1.5deg); }
+            50% { transform: translate(3px, -2px) rotate(1.5deg); }
+            75% { transform: translate(-2px, 3px) rotate(0deg); }
             100% { transform: translate(0, 0) rotate(0deg); }
         }
 
         @keyframes blink {
             50% { opacity: 0; }
-        }
-
-        @keyframes cardSlideUp {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        @keyframes floatEmoji {
-            0% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-8px) rotate(5deg); }
-            100% { transform: translateY(0) rotate(0deg); }
         }
     </style>
 </head>
@@ -769,9 +649,8 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
                 </video>
             </div>
 
-            <!-- Sağ Etkileşim Butonları (Instagram ile Birebir) -->
+            <!-- Sağ Etkileşim Butonları -->
             <div class="reels-actions">
-                <!-- Beğeni (Like) -->
                 <div class="action-item" onclick="likeVideo(this)">
                     <div class="action-icon-wrapper">
                         <svg viewBox="0 0 24 24" id="heart-icon" style="fill: none; stroke: #fff; stroke-width: 2;">
@@ -781,7 +660,6 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
                     <span id="like-count">346K</span>
                 </div>
 
-                <!-- Yorum (Comment) -->
                 <div class="action-item">
                     <div class="action-icon-wrapper">
                         <svg viewBox="0 0 24 24" style="fill: none; stroke: #fff; stroke-width: 2;">
@@ -791,7 +669,6 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
                     <span>4,291</span>
                 </div>
 
-                <!-- Paylaş (Share) -->
                 <div class="action-item">
                     <div class="action-icon-wrapper">
                         <svg viewBox="0 0 24 24" style="fill: none; stroke: #fff; stroke-width: 2;">
@@ -802,7 +679,6 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
                     <span>89.4K</span>
                 </div>
 
-                <!-- Kaydet (Save) -->
                 <div class="action-item" onclick="saveVideo(this)">
                     <div class="action-icon-wrapper">
                         <svg viewBox="0 0 24 24" id="bookmark-icon" style="fill: none; stroke: #fff; stroke-width: 2;">
@@ -812,7 +688,6 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
                     <span id="save-count">12.4K</span>
                 </div>
 
-                <!-- Seçenekler (More) -->
                 <div class="action-item">
                     <div class="action-icon-wrapper">
                         <svg viewBox="0 0 24 24" style="fill: #fff;">
@@ -823,7 +698,6 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
                     </div>
                 </div>
 
-                <!-- Müzik Albüm Plağı -->
                 <div class="action-item">
                     <div class="music-disc-wrapper">
                         <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=150&auto=format&fit=crop" class="music-disc" alt="Müzik">
@@ -856,31 +730,26 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             <!-- Instagram Alt Barı -->
             <div class="instagram-nav-bar">
                 <div class="nav-icon-link">
-                    <!-- Home -->
                     <svg class="nav-icon" viewBox="0 0 24 24">
                         <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
                     </svg>
                 </div>
                 <div class="nav-icon-link">
-                    <!-- Search -->
                     <svg class="nav-icon" viewBox="0 0 24 24">
                         <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
                     </svg>
                 </div>
                 <div class="nav-icon-link">
-                    <!-- Create -->
                     <svg class="nav-icon" viewBox="0 0 24 24">
                         <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
                     </svg>
                 </div>
                 <div class="nav-icon-link">
-                    <!-- Reels (Active/Filled) -->
                     <svg class="nav-icon filled" viewBox="0 0 24 24">
                         <path d="M19 4h-2V2h-2v2H9V2H7v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V8h14v12zm-5-8l-4-2.5v5l4-2.5z"/>
                     </svg>
                 </div>
                 <div class="nav-icon-link">
-                    <!-- Profile circular placeholder -->
                     <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=150&auto=format&fit=crop" class="nav-profile-pic" alt="Profil">
                 </div>
             </div>
@@ -891,47 +760,25 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
         <div class="glitch-screen" id="glitch-layer">
             <div class="noise"></div>
             <div class="glitch-static">
-                <div class="glitch-static-text">SİSTEM HATASI</div>
-                <p style="color: #ff3838; margin-top: 10px; font-family: monospace; font-size: 12px; letter-spacing: 1px;">CRITICAL_SYSTEM_FAILURE (0x000000A1)</p>
+                <div class="glitch-static-text">CRITICAL FAILURE</div>
+                <p style="color: #ff2222; margin-top: 10px; font-family: monospace; font-size: 11px; letter-spacing: 1px;">SYSTEM_INTRUSION_DETECTED (0x000000B9)</p>
             </div>
         </div>
 
-        <!-- 3. HACKER/TERMINAL EKRANI -->
-        <div class="terminal-screen" id="terminal-layer">
-            <div class="terminal-header">
-                <span>[TERMINAL ROOT@<?php echo strtoupper($config['hacker_group']); ?>:~]</span>
-                <span>BAĞLANTI: GÜVENLİ (SSL_3.0)</span>
+        <!-- 3. MAVİ EKRAN / TROJAN ALARM ARAYÜZÜ -->
+        <div class="trojan-screen" id="trojan-layer">
+            <div class="warning-header">
+                <div class="warning-title">⚠️ TROJAN VİRÜSÜ TESPİT EDİLDİ! ⚠️</div>
+                <div class="warning-subtitle">Sistem Erişimi Engellendi - Trojan.Win32X.Generic</div>
             </div>
-            <div id="terminal-content"></div>
+            
+            <div class="terminal-feed" id="terminal-content"></div>
             <span class="blink-cursor"></span>
-        </div>
 
-        <!-- 4. ŞAKA AÇIKLAMA EKRANI (PRANK REVEAL) -->
-        <div class="reveal-screen" id="reveal-layer">
-            <div class="reveal-card">
-                <span class="emoji-avatar">😜</span>
-                <h1 class="reveal-title">Şaka Şaka!</h1>
-                <p class="reveal-subtitle">Tamamen Zararsız Bir Şakaydı</p>
-                
-                <p class="reveal-desc">
-                    Arkadaşınız sizi eğlendirmek amacıyla bu bağlantıyı gönderdi. Cihazınıza kesinlikle <b>hiçbir zararlı dosya indirilmedi</b>, sistem ayarlarınız değiştirilmedi ve hiçbir kişisel veriniz toplanmadı veya sunucularımıza kaydedilmedi. Her şey tamamen tarayıcınızın içerisinde simüle edilen görsel bir illüzyondan ibarettir.
-                </p>
-
-                <div class="data-box">
-                    <div class="data-item">Cihazınız: <span><?php echo $os; ?></span></div>
-                    <div class="data-item">Tarayıcı: <span><?php echo $browser; ?></span></div>
-                    <div class="data-item">IP Adresiniz: <span><?php echo $user_ip; ?></span></div>
-                    <div style="font-size: 9px; color: #a1a1aa; margin-top: 8px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 6px; line-height: 1.3;">
-                        *Bu veriler tarayıcınızın her web sitesiyle paylaştığı genel bilgilerdir, hiçbir yere kaydedilmemiştir.
-                    </div>
-                </div>
-
-                <div class="share-box">
-                    <input type="text" class="share-input" id="share-link" readonly value="">
-                    <button class="copy-btn" onclick="copyLink()">Kopyala</button>
-                </div>
-
-                <button class="btn-restart" onclick="restartPrank()">Tekrar Oynat 🔁</button>
+            <!-- Yasal uyarı ve paylaşım butonu (Çok silik, görünümü bozmayan yasal uyarı) -->
+            <div class="hidden-footer" onclick="copyLink()">
+                <span>[ Bu sayfa zararsız bir şaka simülasyonudur. Verileriniz güvendedir ]</span>
+                <span id="copy-status">[ Linki Kopyala ]</span>
             </div>
         </div>
 
@@ -952,15 +799,10 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
         const unmuteClickLayer = document.getElementById('unmute-click-layer');
         const reelsLayer = document.getElementById('reels-layer');
         const glitchLayer = document.getElementById('glitch-layer');
-        const terminalLayer = document.getElementById('terminal-layer');
+        const trojanLayer = document.getElementById('trojan-layer');
         const terminalContent = document.getElementById('terminal-content');
-        const revealLayer = document.getElementById('reveal-layer');
-        const shareLinkInput = document.getElementById('share-link');
 
-        // URL linkini hazırlama
-        shareLinkInput.value = window.location.href;
-
-        // Web Audio API için Değişkenler
+        // Web Audio API Değişkenleri
         let audioCtx;
         let alarmInterval;
 
@@ -973,15 +815,14 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             }
         }
 
-        // Web Audio API ile klavye tıkırtı sesi sentezleme
         function playTypeSound() {
             if (!audioCtx) return;
             try {
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
                 osc.type = 'sine';
-                osc.frequency.setValueAtTime(800 + Math.random() * 600, audioCtx.currentTime);
-                gain.gain.setValueAtTime(0.008, audioCtx.currentTime);
+                osc.frequency.setValueAtTime(600 + Math.random() * 800, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.01, audioCtx.currentTime);
                 gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.02);
                 osc.connect(gain);
                 gain.connect(audioCtx.destination);
@@ -990,11 +831,10 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             } catch(e) {}
         }
 
-        // Glitch statik gürültü sesi
         function playGlitchSound() {
             if (!audioCtx) return;
             try {
-                const bufferSize = audioCtx.sampleRate * 0.4;
+                const bufferSize = audioCtx.sampleRate * 0.3;
                 const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
                 const data = buffer.getChannelData(0);
                 for (let i = 0; i < bufferSize; i++) {
@@ -1005,11 +845,11 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
                 
                 const filter = audioCtx.createBiquadFilter();
                 filter.type = 'bandpass';
-                filter.frequency.value = 1200;
+                filter.frequency.value = 1000;
                 
                 const gain = audioCtx.createGain();
-                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
+                gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
                 
                 noise.connect(filter);
                 filter.connect(gain);
@@ -1018,7 +858,7 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             } catch(e) {}
         }
 
-        // Uyarı alarm sesi (İki frekanslı retro bip bip)
+        // Korkutucu Alarm Sesi (Daha yoğun alarm bepleri)
         function startAlarmSound() {
             if (!audioCtx) return;
             let alternate = false;
@@ -1026,17 +866,17 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
                 try {
                     const osc = audioCtx.createOscillator();
                     const gain = audioCtx.createGain();
-                    osc.type = 'square';
-                    osc.frequency.setValueAtTime(alternate ? 980 : 1250, audioCtx.currentTime);
-                    gain.gain.setValueAtTime(0.02, audioCtx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.15);
+                    osc.type = 'sawtooth'; // Daha sert alarm sesi
+                    osc.frequency.setValueAtTime(alternate ? 880 : 1300, audioCtx.currentTime);
+                    gain.gain.setValueAtTime(0.03, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.2);
                     osc.connect(gain);
                     gain.connect(audioCtx.destination);
                     osc.start();
-                    osc.stop(audioCtx.currentTime + 0.18);
+                    osc.stop(audioCtx.currentTime + 0.22);
                     alternate = !alternate;
                 } catch(e) {}
-            }, 250);
+            }, 200);
         }
 
         function stopAlarmSound() {
@@ -1045,7 +885,7 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             }
         }
 
-        // Etkileşim: Kullanıcı Reels'e tıkladığında ses açılır
+        // Etkileşim
         let prankTriggered = false;
         unmuteClickLayer.addEventListener('click', () => {
             initAudio();
@@ -1057,14 +897,13 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             reelsVideo.muted = false;
             reelsVideo.play().catch(() => {});
 
-            // Şaka tetikleyicisini çalıştır
             if (!prankTriggered) {
                 prankTriggered = true;
                 setTimeout(startGlitchPhase, config.videoDelay);
             }
         });
 
-        // Reels Beğeni Simülasyonu
+        // Reels Buton Simülasyonları
         let liked = false;
         function likeVideo(element) {
             liked = !liked;
@@ -1083,7 +922,6 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             }
         }
 
-        // Reels Kaydet Simülasyonu
         let saved = false;
         function saveVideo(element) {
             saved = !saved;
@@ -1102,101 +940,80 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             }
         }
 
-        // --- GLITCH EVRESİ (Videonun Bozulma Anı) ---
+        // --- GLITCH EVRESİ ---
         function startGlitchPhase() {
             reelsVideo.pause();
             playGlitchSound();
             glitchLayer.style.display = 'block';
 
-            // 1.5 saniye glitch gösterdikten sonra terminale geç
             setTimeout(() => {
                 glitchLayer.style.display = 'none';
                 reelsLayer.style.display = 'none';
-                startTerminalPhase();
-            }, 1800);
+                startTrojanPhase();
+            }, 1200);
         }
 
-        // --- TERMINAL EVRESİ (Sızma/Yükleme Simülasyonu) ---
-        function startTerminalPhase() {
-            terminalLayer.style.display = 'flex';
-            
-            // Yazdırılacak terminal komut dizileri
+        // --- TROJAN ALARM VE HIZLI YÜKLEME EVRESİ ---
+        function startTrojanPhase() {
+            trojanLayer.style.display = 'flex';
+            startAlarmSound();
+
+            // Yüklenen trojan Win32X kodları ve uyarı mesajları feed'i
             const lines = [
-                { text: `> INITIALIZING SECURE SHELL...`, type: 'info', delay: 400 },
-                { text: `> CONNECTING TO SERVER [IP: 89.252.12.9]... SUCCESS`, type: 'text', delay: 300 },
-                { text: `> TARGET ACQUIRED: ${config.targetName.toUpperCase()}`, type: 'success', delay: 500 },
-                { text: `> IP ADDRESS DETECTED: ${config.ip}`, type: 'info', delay: 400 },
-                { text: `> SYSTEM ANALYSIS: OS [${config.os}] | BROWSER [${config.browser}]`, type: 'info', delay: 400 },
-                { text: `\n[!] BYPASSING LOCAL FIREWALL (PORT 8080/443)...`, type: 'danger', delay: 600 },
-                { text: `[!] CVE-2026-X BUFFER OVERFLOW EXPLOIT APPLIED`, type: 'danger', delay: 500 },
-                { text: `[+] SHELL ACCESS STABLISHED [LEVEL: ROOT]`, type: 'success', delay: 600 },
-                { text: `\n> DOWNLOADING REMOTE DEPENDENCIES...`, type: 'info', delay: 300 },
-                { text: `INSTALLING: rootkit_x64.bin [128KB]...`, type: 'download', filename: 'rootkit_x64.bin', delay: 1000 },
-                { text: `INSTALLING: keylogger_driver.sys [64KB]...`, type: 'download', filename: 'keylogger_driver.sys', delay: 800 },
-                { text: `INSTALLING: browser_credentials_grabber.exe [2.4MB]...`, type: 'download', filename: 'browser_credentials_grabber.exe', delay: 1400 },
-                { text: `INSTALLING: system_persistence_service.dll [512KB]...`, type: 'download', filename: 'system_persistence_service.dll', delay: 1000 },
-                { text: `\n[!] MOUNTING DIRECTORIES... SUCCESS`, type: 'text', delay: 400 },
-                { text: `[!] INJECTING EXECUTABLES TO STARTUP REGISTRY... SUCCESS`, type: 'text', delay: 500 },
-                { text: `[!] DISABLING DEFENDER / FIREWALL SERVICES...`, type: 'danger', delay: 600 },
-                { text: `[+] SYSTEM ACQUISITION 100% COMPLETE.`, type: 'success', delay: 500 },
-                { text: `\n*** WARNING: LOCAL DRIVE IS ENCRYPTED BY ${config.hackerGroup} ***`, type: 'danger', alarm: true, delay: 1000 },
-                { text: `*** INITIATING COMMAND PROTOCOL SHUTDOWN ***`, type: 'danger', delay: 1000 }
+                { text: `[SYSTEM] DETECTING THREAT LEVEL: CRITICAL...`, type: 'win-code', delay: 100 },
+                { text: `[ALERT] SECURITY COMPROMISED - INTRUDER LOCALIZED`, type: 'trojan-name', delay: 150 },
+                { text: `[INFO] TARGET IP: ${config.ip} | OS: ${config.os}`, type: 'info', delay: 100 },
+                { text: `[INFO] TARGET USER IDENTIFIER: ${config.targetName.toUpperCase()}`, type: 'info', delay: 100 },
+                { text: `\n[!] TrojanWin32.GenericX.sys DETECTED IN MEMORY BUFFER!`, type: 'trojan-name', delay: 150 },
+                { text: `[!] TrojanWin32.CredentialGrabber.dll ACTIVE`, type: 'trojan-name', delay: 150 },
+                { text: `[!] TrojanWin64.Spy.CameraGrab.bin EXECUTED`, type: 'trojan-name', delay: 200 },
+                { text: `\n> DOWNLOADING ADDITIONAL EXPLOIT DEPENDENCIES...`, type: 'info', delay: 100 },
+                { text: `Downloading Payload: TrojanWin32.X.pack...`, type: 'download', delay: 800 },
+                { text: `Downloading Payload: cryptor_key_generator.sys...`, type: 'download', delay: 600 },
+                { text: `Downloading Payload: remote_access_v3.dll...`, type: 'download', delay: 900 },
+                { text: `\n[SYSTEM] Writing win32x_service.lnk to startup registry...`, type: 'win-code', delay: 150 },
+                { text: `[SYSTEM] Disabling Security Center features... SUCCESS`, type: 'success', delay: 100 },
+                { text: `[SYSTEM] Initiating remote port mapping... SUCCESS`, type: 'success', delay: 150 },
+                { text: `[SYSTEM] Compressing local user credentials directory...`, type: 'win-code', delay: 200 },
+                { text: `\n[!] Trojan.Win32X.Ransom.CryptoCrypt INFILTRATION COMPLETE.`, type: 'trojan-name', delay: 300 },
+                { text: `[!] SYSTEM LOCKED. ALL LOCAL DATABASE ENTRIES ARE ENCRYPTED.`, type: 'trojan-name', delay: 300 },
+                { text: `\n[CRITICAL WARNING] DO NOT SHUTDOWN YOUR COMPUTER!`, type: 'trojan-name', delay: 500 },
+                { text: `[CRITICAL WARNING] ATTEMPTING PROTOCOL RECOVERY... FAILED`, type: 'trojan-name', delay: 1000 }
             ];
 
             let lineIndex = 0;
 
             function printNextLine() {
                 if (lineIndex >= lines.length) {
-                    // Terminal bitti, alarmı sustur ve şakayı açıkla
-                    setTimeout(() => {
-                        stopAlarmSound();
-                        showPrankReveal();
-                    }, 1500);
+                    // Terminal bitti. Şaka bitiş ekranı açılmıyor, bu korkutucu ekran kalıyor!
                     return;
                 }
 
                 const currentLine = lines[lineIndex];
-                
-                // Alarm tetikleme
-                if (currentLine.alarm) {
-                    startAlarmSound();
-                }
 
                 const lineDiv = document.createElement('div');
-                lineDiv.className = 'terminal-line';
+                lineDiv.className = 'feed-line';
                 if (currentLine.type) {
                     lineDiv.classList.add(currentLine.type);
                 }
 
                 terminalContent.appendChild(lineDiv);
-                terminalLayer.scrollTop = terminalLayer.scrollHeight;
+                trojanLayer.scrollTop = trojanLayer.scrollHeight;
 
                 if (currentLine.type === 'download') {
-                    // Yükleme barı simülasyonu
+                    // Hızlı yükleme barı simülasyonu
                     lineDiv.innerHTML = `${currentLine.text}<br>`;
-                    const barWrapper = document.createElement('div');
-                    barWrapper.className = 'progress-bar-wrapper';
-                    
-                    const barTrack = document.createElement('div');
-                    barTrack.className = 'progress-bar-track';
+                    const barContainer = document.createElement('div');
+                    barContainer.className = 'progress-bar-container';
                     
                     const barFill = document.createElement('div');
                     barFill.className = 'progress-bar-fill';
-                    
-                    barTrack.appendChild(barFill);
-                    barWrapper.appendChild(barTrack);
-                    
-                    const barPercent = document.createElement('span');
-                    barPercent.innerText = '0%';
-                    barWrapper.appendChild(barPercent);
-                    
-                    lineDiv.appendChild(barWrapper);
-                    terminalLayer.scrollTop = terminalLayer.scrollHeight;
+                    barContainer.appendChild(barFill);
+                    lineDiv.appendChild(barContainer);
 
-                    // Barı doldurma
                     let percent = 0;
-                    const duration = currentLine.delay - 200;
-                    const intervalTime = 50;
+                    const duration = currentLine.delay;
+                    const intervalTime = 40;
                     const steps = duration / intervalTime;
                     const stepIncrement = 100 / steps;
 
@@ -1207,15 +1024,14 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
                             clearInterval(barInterval);
                             lineDiv.innerHTML = `${currentLine.text} <span class="success">BAŞARILI</span>`;
                             lineIndex++;
-                            setTimeout(printNextLine, 200);
+                            setTimeout(printNextLine, 100);
                         }
                         barFill.style.width = `${percent}%`;
-                        barPercent.innerText = `${Math.round(percent)}%`;
                         playTypeSound();
                     }, intervalTime);
 
                 } else {
-                    // Normal karakter karakter yazı yazma efekti
+                    // Çok hızlı karakter karakter yazı yazma efekti (İnandırıcılık için)
                     let charIndex = 0;
                     const text = currentLine.text;
                     
@@ -1229,59 +1045,32 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
                             lineIndex++;
                             setTimeout(printNextLine, currentLine.delay);
                         }
-                    }, 12);
+                    }, 8);
                 }
             }
 
             printNextLine();
         }
 
-        // --- ŞAKA BİTİŞ EKRANINI GÖSTER ---
-        function showPrankReveal() {
-            terminalLayer.style.display = 'none';
-            revealLayer.style.display = 'flex';
-            setTimeout(() => {
-                revealLayer.style.opacity = '1';
-            }, 50);
-        }
-
-        // Link Kopyalama Fonksiyonu
+        // Link Kopyalama Fonksiyonu (Faint Footer içindeki link için)
         function copyLink() {
-            const linkInput = document.getElementById('share-link');
-            linkInput.select();
-            linkInput.setSelectionRange(0, 99999); // Mobil için
+            const tempInput = document.createElement('input');
+            tempInput.value = window.location.href;
+            document.body.appendChild(tempInput);
+            tempInput.select();
             
-            navigator.clipboard.writeText(linkInput.value).then(() => {
-                const btn = document.querySelector('.copy-btn');
-                const originalText = btn.innerText;
-                btn.innerText = 'Kopyalandı! ✓';
-                btn.style.background = '#22c55e'; // Yeşil ton
-                
+            navigator.clipboard.writeText(tempInput.value).then(() => {
+                const status = document.getElementById('copy-status');
+                status.innerText = '[ Link Kopyalandı! ✓ ]';
+                status.style.color = 'var(--terminal-green)';
                 setTimeout(() => {
-                    btn.innerText = originalText;
-                    btn.style.background = 'var(--ig-primary-gradient)';
-                }, 2000);
+                    status.innerText = '[ Linki Kopyala ]';
+                    status.style.color = '';
+                }, 2500);
             }).catch(() => {
-                alert('Bağlantı kopyalanamadı, lütfen manuel olarak kopyalayın.');
+                alert('Bağlantı kopyalanamadı.');
             });
-        }
-
-        // Şakayı Yeniden Başlatma
-        function restartPrank() {
-            stopAlarmSound();
-            prankTriggered = false;
-            
-            // Ekranları sıfırla
-            revealLayer.style.opacity = '0';
-            setTimeout(() => {
-                revealLayer.style.display = 'none';
-                terminalContent.innerHTML = '';
-                reelsLayer.style.display = 'flex';
-                unmuteClickLayer.style.display = 'flex';
-                unmuteClickLayer.style.opacity = '1';
-                reelsVideo.muted = true;
-                reelsVideo.currentTime = 0;
-            }, 500);
+            document.body.removeChild(tempInput);
         }
     </script>
 </body>
