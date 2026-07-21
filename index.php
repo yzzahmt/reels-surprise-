@@ -413,17 +413,17 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             object-fit: cover;
         }
 
-        /* --- GLITCH VE CRASH EKRANI --- */
-        .glitch-screen {
-            position: absolute;
+        /* --- TÜM EKRANI KAPLAYACAK YENİ GLITCH VE CRASH EKRANI (BREAKOUT) --- */
+        .glitch-screen, .trojan-screen {
+            position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            z-index: 50;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9999; /* En üst katmanda telefon çerçevesini yırtar */
             display: none;
             overflow: hidden;
+            box-sizing: border-box;
         }
 
         .noise {
@@ -453,46 +453,33 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
         }
 
         .glitch-static-text {
-            font-size: 32px;
+            font-size: 38px;
             font-weight: 900;
             color: var(--danger-red);
-            text-shadow: 2px 2px 0px #00fffa;
-            letter-spacing: 5px;
+            text-shadow: 2.5px 2.5px 0px #00fffa;
+            letter-spacing: 6px;
             text-transform: uppercase;
         }
 
-        /* --- MAVİ EKRAN / TROJAN TESPİT ARAYÜZÜ --- */
+        /* --- MAVİ EKRAN / TROJAN ALARM ARAYÜZÜ (TÜM EKRAN) --- */
         .trojan-screen {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #002b5c; /* Mavi Ekran Arka Planı */
-            z-index: 60;
-            display: none;
+            background: #002b5c; 
             flex-direction: column;
-            padding: 24px;
+            padding: 30px;
             font-family: 'JetBrains Mono', 'Courier New', monospace;
-            overflow-y: auto;
-            scrollbar-width: none;
             color: #fff;
-        }
-
-        .trojan-screen::-webkit-scrollbar {
-            display: none;
         }
 
         .warning-header {
             text-align: center;
             border-bottom: 2px solid var(--danger-red);
-            padding-bottom: 12px;
-            margin-bottom: 20px;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
         }
 
         .warning-title {
             color: var(--danger-red);
-            font-size: 20px;
+            font-size: 24px;
             font-weight: 700;
             letter-spacing: 0.5px;
             animation: pulseText 1s infinite alternate;
@@ -500,22 +487,26 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
 
         .warning-subtitle {
             color: var(--warning-yellow);
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 700;
-            margin-top: 5px;
+            margin-top: 8px;
             text-transform: uppercase;
         }
 
         .terminal-feed {
             flex-grow: 1;
-            font-size: 11.5px;
+            font-size: 13px;
             line-height: 1.6;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             white-space: pre-wrap;
+            max-width: 800px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .feed-line {
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
         
         .feed-line.trojan-name {
@@ -535,46 +526,51 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             color: var(--terminal-green);
         }
 
-        .progress-bar-container {
-            border: 1px solid #fff;
-            background: rgba(255, 255, 255, 0.1);
-            height: 14px;
-            width: 100%;
-            margin: 10px 0;
-            position: relative;
-        }
-
-        .progress-bar-fill {
-            background: var(--danger-red);
-            height: 100%;
-            width: 0%;
-            transition: width 0.05s linear;
-        }
-
         .blink-cursor {
             display: inline-block;
-            width: 8px;
-            height: 14px;
+            width: 10px;
+            height: 16px;
             background: #fff;
             animation: blink 0.8s infinite;
             vertical-align: middle;
         }
 
-        /* Görünmez / Çok Silik Alt Not (Yasal Uyum ve Şaka Paylaşımı) */
+        /* Masaüstünde Yazıların Daha Okunaklı Olması İçin */
+        @media (min-width: 768px) {
+            .trojan-screen {
+                padding: 60px;
+            }
+            .warning-title {
+                font-size: 36px;
+            }
+            .warning-subtitle {
+                font-size: 20px;
+            }
+            .terminal-feed {
+                font-size: 17px;
+                line-height: 1.8;
+            }
+        }
+
+        /* Görünmez / Çok Silik Alt Not */
         .hidden-footer {
             margin-top: auto;
             padding-top: 15px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
             display: flex;
             justify-content: space-between;
             font-size: 9px;
-            color: rgba(255, 255, 255, 0.15); /* Çok silik renk */
+            color: rgba(255, 255, 255, 0.12);
             cursor: pointer;
             transition: color 0.3s;
+            max-width: 800px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .hidden-footer:hover {
-            color: rgba(255, 255, 255, 0.7); /* Üstüne gelince okunabilir olur */
+            color: rgba(255, 255, 255, 0.6);
         }
 
         /* --- ANIMASYONLAR --- */
@@ -601,9 +597,9 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
 
         @keyframes screenShake {
             0% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(-4px, 3px) rotate(-1.5deg); }
-            50% { transform: translate(3px, -2px) rotate(1.5deg); }
-            75% { transform: translate(-2px, 3px) rotate(0deg); }
+            25% { transform: translate(-5px, 4px) rotate(-1.5deg); }
+            50% { transform: translate(4px, -3px) rotate(1.5deg); }
+            75% { transform: translate(-3px, 4px) rotate(0deg); }
             100% { transform: translate(0, 0) rotate(0deg); }
         }
 
@@ -614,9 +610,8 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
 </head>
 <body>
 
+    <!-- 1. INSTAGRAM REELS EKRANI (Telefon Çerçevesinde Ortalı) -->
     <div class="app-container">
-
-        <!-- 1. INSTAGRAM REELS EKRANI -->
         <div class="reels-screen" id="reels-layer">
             
             <!-- Sesi Aç Butonu Overlay -->
@@ -649,7 +644,7 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
                 </video>
             </div>
 
-            <!-- Sağ Etkileşim Butonları -->
+            <!-- Sağ Etkileşim Butonları (Instagram ile Birebir) -->
             <div class="reels-actions">
                 <div class="action-item" onclick="likeVideo(this)">
                     <div class="action-icon-wrapper">
@@ -755,33 +750,32 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             </div>
 
         </div>
+    </div>
 
-        <!-- 2. GLITCH EKRANI -->
-        <div class="glitch-screen" id="glitch-layer">
-            <div class="noise"></div>
-            <div class="glitch-static">
-                <div class="glitch-static-text">CRITICAL FAILURE</div>
-                <p style="color: #ff2222; margin-top: 10px; font-family: monospace; font-size: 11px; letter-spacing: 1px;">SYSTEM_INTRUSION_DETECTED (0x000000B9)</p>
-            </div>
+    <!-- 2. TÜM EKRAN GLITCH EKRANI (BREAKOUT) -->
+    <div class="glitch-screen" id="glitch-layer">
+        <div class="noise"></div>
+        <div class="glitch-static">
+            <div class="glitch-static-text">CRITICAL FAILURE</div>
+            <p style="color: #ff2222; margin-top: 10px; font-family: monospace; font-size: 14px; letter-spacing: 1px;">SYSTEM_INTRUSION_DETECTED (0x000000B9)</p>
         </div>
+    </div>
 
-        <!-- 3. MAVİ EKRAN / TROJAN ALARM ARAYÜZÜ -->
-        <div class="trojan-screen" id="trojan-layer">
-            <div class="warning-header">
-                <div class="warning-title">⚠️ TROJAN VİRÜSÜ TESPİT EDİLDİ! ⚠️</div>
-                <div class="warning-subtitle">Sistem Erişimi Engellendi - Trojan.Win32X.Generic</div>
-            </div>
-            
-            <div class="terminal-feed" id="terminal-content"></div>
-            <span class="blink-cursor"></span>
-
-            <!-- Yasal uyarı ve paylaşım butonu (Çok silik, görünümü bozmayan yasal uyarı) -->
-            <div class="hidden-footer" onclick="copyLink()">
-                <span>[ Bu sayfa zararsız bir şaka simülasyonudur. Verileriniz güvendedir ]</span>
-                <span id="copy-status">[ Linki Kopyala ]</span>
-            </div>
+    <!-- 3. TÜM EKRAN MAVİ EKRAN / TROJAN ALARM ARAYÜZÜ (BREAKOUT) -->
+    <div class="trojan-screen" id="trojan-layer">
+        <div class="warning-header">
+            <div class="warning-title">⚠️ TROJAN VİRÜSÜ TESPİT EDİLDİ! ⚠️</div>
+            <div class="warning-subtitle">Sistem Erişimi Engellendi - Trojan.Win32X.Generic</div>
         </div>
+        
+        <div class="terminal-feed" id="terminal-content"></div>
+        <span class="blink-cursor"></span>
 
+        <!-- Yasal uyarı ve paylaşım butonu (Çok silik, görünümü bozmayan yasal uyarı) -->
+        <div class="hidden-footer" onclick="copyLink()">
+            <span>[ Bu sayfa zararsız bir şaka simülasyonudur. Verileriniz güvendedir ]</span>
+            <span id="copy-status">[ Linki Kopyala ]</span>
+        </div>
     </div>
 
     <!-- JavaScript Dinamik Arayüz Mantığı -->
@@ -821,13 +815,13 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
                 osc.type = 'sine';
-                osc.frequency.setValueAtTime(600 + Math.random() * 800, audioCtx.currentTime);
-                gain.gain.setValueAtTime(0.01, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.02);
+                osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.015, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.03);
                 osc.connect(gain);
                 gain.connect(audioCtx.destination);
                 osc.start();
-                osc.stop(audioCtx.currentTime + 0.03);
+                osc.stop(audioCtx.currentTime + 0.04);
             } catch(e) {}
         }
 
@@ -858,7 +852,7 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             } catch(e) {}
         }
 
-        // Korkutucu Alarm Sesi (Daha yoğun alarm bepleri)
+        // Korkutucu Alarm Sesi
         function startAlarmSound() {
             if (!audioCtx) return;
             let alternate = false;
@@ -866,7 +860,7 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
                 try {
                     const osc = audioCtx.createOscillator();
                     const gain = audioCtx.createGain();
-                    osc.type = 'sawtooth'; // Daha sert alarm sesi
+                    osc.type = 'sawtooth';
                     osc.frequency.setValueAtTime(alternate ? 880 : 1300, audioCtx.currentTime);
                     gain.gain.setValueAtTime(0.03, audioCtx.currentTime);
                     gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.2);
@@ -948,44 +942,40 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
 
             setTimeout(() => {
                 glitchLayer.style.display = 'none';
-                reelsLayer.style.display = 'none';
+                // Reels'i kapat
+                document.querySelector('.app-container').style.display = 'none';
                 startTrojanPhase();
             }, 1200);
         }
 
-        // --- TROJAN ALARM VE HIZLI YÜKLEME EVRESİ ---
+        // --- TROJAN ALARM VE HIZLI SATIR SATIR AKIŞ EVRESİ ---
         function startTrojanPhase() {
             trojanLayer.style.display = 'flex';
             startAlarmSound();
 
-            // Yüklenen trojan Win32X kodları ve uyarı mesajları feed'i
+            // Yüklenen trojan Win32X kodları ve kısa uyarı mesajları feed'i (Çok daha hızlı ve akıcı)
             const lines = [
-                { text: `[SYSTEM] DETECTING THREAT LEVEL: CRITICAL...`, type: 'win-code', delay: 100 },
-                { text: `[ALERT] SECURITY COMPROMISED - INTRUDER LOCALIZED`, type: 'trojan-name', delay: 150 },
-                { text: `[INFO] TARGET IP: ${config.ip} | OS: ${config.os}`, type: 'info', delay: 100 },
-                { text: `[INFO] TARGET USER IDENTIFIER: ${config.targetName.toUpperCase()}`, type: 'info', delay: 100 },
-                { text: `\n[!] TrojanWin32.GenericX.sys DETECTED IN MEMORY BUFFER!`, type: 'trojan-name', delay: 150 },
-                { text: `[!] TrojanWin32.CredentialGrabber.dll ACTIVE`, type: 'trojan-name', delay: 150 },
-                { text: `[!] TrojanWin64.Spy.CameraGrab.bin EXECUTED`, type: 'trojan-name', delay: 200 },
-                { text: `\n> DOWNLOADING ADDITIONAL EXPLOIT DEPENDENCIES...`, type: 'info', delay: 100 },
-                { text: `Downloading Payload: TrojanWin32.X.pack...`, type: 'download', delay: 800 },
-                { text: `Downloading Payload: cryptor_key_generator.sys...`, type: 'download', delay: 600 },
-                { text: `Downloading Payload: remote_access_v3.dll...`, type: 'download', delay: 900 },
-                { text: `\n[SYSTEM] Writing win32x_service.lnk to startup registry...`, type: 'win-code', delay: 150 },
-                { text: `[SYSTEM] Disabling Security Center features... SUCCESS`, type: 'success', delay: 100 },
-                { text: `[SYSTEM] Initiating remote port mapping... SUCCESS`, type: 'success', delay: 150 },
-                { text: `[SYSTEM] Compressing local user credentials directory...`, type: 'win-code', delay: 200 },
-                { text: `\n[!] Trojan.Win32X.Ransom.CryptoCrypt INFILTRATION COMPLETE.`, type: 'trojan-name', delay: 300 },
-                { text: `[!] SYSTEM LOCKED. ALL LOCAL DATABASE ENTRIES ARE ENCRYPTED.`, type: 'trojan-name', delay: 300 },
-                { text: `\n[CRITICAL WARNING] DO NOT SHUTDOWN YOUR COMPUTER!`, type: 'trojan-name', delay: 500 },
-                { text: `[CRITICAL WARNING] ATTEMPTING PROTOCOL RECOVERY... FAILED`, type: 'trojan-name', delay: 1000 }
+                { text: `[CRITICAL WARNING] SYSTEM INTRUSION DETECTED`, type: 'trojan-name' },
+                { text: `[!] TARGET ID: ${config.targetName.toUpperCase()} | TARGET IP: ${config.ip} | TARGET OS: ${config.os}`, type: 'info' },
+                { text: `[!] Trojan.Win32X.Generic.sys detected in memory buffer.`, type: 'trojan-name' },
+                { text: `[!] Trojan.Win64.Spy.CameraGrab.bin payload compiled successfully.`, type: 'trojan-name' },
+                { text: `\n> DOWNLOADING ADDITIONAL EXPLOIT DEPENDENCIES...`, type: 'info' },
+                { text: `[+] Downloading payload: TrojanWin32.X.pack ... BAŞARILI`, type: 'success' },
+                { text: `[+] Downloading payload: remote_access_v3.dll ... BAŞARILI`, type: 'success' },
+                { text: `[+] Downloading payload: chrome_keygrabber_x64.sys ... BAŞARILI`, type: 'success' },
+                { text: `\n[SYSTEM] Writing win32x_service.lnk to startup registry...`, type: 'win-code' },
+                { text: `[SYSTEM] Disabling Windows Defender & system firewall... SUCCESS`, type: 'success' },
+                { text: `[SYSTEM] Opening remote ports for anonymous listening... SUCCESS`, type: 'success' },
+                { text: `[SYSTEM] Extracting user browser profiles and active cookies... SUCCESS`, type: 'success' },
+                { text: `\n[!] Trojan.Win32X.Ransom.CryptoCrypt INFILTRATION COMPLETE.`, type: 'trojan-name' },
+                { text: `[!] SYSTEM HAS BEEN COMPROMISED. LOCAL DATA WILL BE ENCRYPTED.`, type: 'trojan-name' },
+                { text: `\n[CRITICAL ERROR] SYSTEM PROTOCOLS SUSPENDED. DO NOT REBOOT YOUR DEVICE!`, type: 'trojan-name' }
             ];
 
             let lineIndex = 0;
 
             function printNextLine() {
                 if (lineIndex >= lines.length) {
-                    // Terminal bitti. Şaka bitiş ekranı açılmıyor, bu korkutucu ekran kalıyor!
                     return;
                 }
 
@@ -997,62 +987,21 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
                     lineDiv.classList.add(currentLine.type);
                 }
 
+                // Satırı tek seferde ekrana bas
+                lineDiv.innerText = currentLine.text;
                 terminalContent.appendChild(lineDiv);
                 trojanLayer.scrollTop = trojanLayer.scrollHeight;
+                
+                playTypeSound();
 
-                if (currentLine.type === 'download') {
-                    // Hızlı yükleme barı simülasyonu
-                    lineDiv.innerHTML = `${currentLine.text}<br>`;
-                    const barContainer = document.createElement('div');
-                    barContainer.className = 'progress-bar-container';
-                    
-                    const barFill = document.createElement('div');
-                    barFill.className = 'progress-bar-fill';
-                    barContainer.appendChild(barFill);
-                    lineDiv.appendChild(barContainer);
-
-                    let percent = 0;
-                    const duration = currentLine.delay;
-                    const intervalTime = 40;
-                    const steps = duration / intervalTime;
-                    const stepIncrement = 100 / steps;
-
-                    const barInterval = setInterval(() => {
-                        percent += stepIncrement;
-                        if (percent >= 100) {
-                            percent = 100;
-                            clearInterval(barInterval);
-                            lineDiv.innerHTML = `${currentLine.text} <span class="success">BAŞARILI</span>`;
-                            lineIndex++;
-                            setTimeout(printNextLine, 100);
-                        }
-                        barFill.style.width = `${percent}%`;
-                        playTypeSound();
-                    }, intervalTime);
-
-                } else {
-                    // Çok hızlı karakter karakter yazı yazma efekti (İnandırıcılık için)
-                    let charIndex = 0;
-                    const text = currentLine.text;
-                    
-                    const charInterval = setInterval(() => {
-                        lineDiv.innerHTML += text.charAt(charIndex);
-                        charIndex++;
-                        playTypeSound();
-
-                        if (charIndex >= text.length) {
-                            clearInterval(charInterval);
-                            lineIndex++;
-                            setTimeout(printNextLine, currentLine.delay);
-                        }
-                    }, 8);
-                }
+                lineIndex++;
+                setTimeout(printNextLine, 120); // Satırlar arası 120ms bekleme
             }
 
             printNextLine();
         }
 
-        // Link Kopyalama Fonksiyonu (Faint Footer içindeki link için)
+        // Link Kopyalama Fonksiyonu
         function copyLink() {
             const tempInput = document.createElement('input');
             tempInput.value = window.location.href;
