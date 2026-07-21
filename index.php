@@ -65,7 +65,7 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             --ig-primary-gradient: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
             --terminal-green: #39ff14;
             --terminal-glow: rgba(57, 255, 20, 0.4);
-            --danger-red: #ff3838;
+            --danger-red: #ff3040;
         }
 
         * {
@@ -145,7 +145,7 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             top: 0;
             left: 0;
             width: 100%;
-            padding: 20px;
+            padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -153,26 +153,17 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             z-index: 10;
         }
 
-        .reels-title {
-            font-size: 20px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+        .reels-header-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: -0.2px;
         }
 
-        .reels-title svg {
-            fill: #fff;
-            width: 16px;
-            height: 16px;
-            transform: rotate(90deg);
-        }
-
-        .reels-header-icons svg {
-            fill: #fff;
+        .header-icon {
             width: 24px;
             height: 24px;
+            fill: #fff;
             cursor: pointer;
         }
 
@@ -220,15 +211,15 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             letter-spacing: 0.5px;
         }
 
-        /* Sağ Butonlar Menüsü */
+        /* Sağ Butonlar Menüsü (Instagram Reels ile Birebir) */
         .reels-actions {
             position: absolute;
             right: 12px;
-            bottom: 100px;
+            bottom: 120px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
+            gap: 22px;
             z-index: 5;
         }
 
@@ -237,29 +228,26 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             flex-direction: column;
             align-items: center;
             cursor: pointer;
-            gap: 5px;
+            gap: 6px;
         }
 
         .action-icon-wrapper {
-            width: 44px;
-            height: 44px;
-            background: rgba(0,0,0,0.3);
-            border-radius: 50%;
+            width: 40px;
+            height: 40px;
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: transform 0.2s;
+            transition: transform 0.15s ease;
         }
 
         .action-icon-wrapper:active {
-            transform: scale(0.9);
+            transform: scale(0.85);
         }
 
         .action-item svg {
-            width: 24px;
-            height: 24px;
-            fill: #fff;
-            transition: fill 0.3s;
+            width: 28px;
+            height: 28px;
+            transition: fill 0.3s, stroke 0.3s;
         }
 
         .action-item span {
@@ -269,45 +257,36 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
         }
 
-        .profile-badge {
-            position: relative;
-            margin-bottom: 5px;
-        }
-
-        .profile-img {
-            width: 36px;
-            height: 36px;
+        /* Müzik Albüm Spinner */
+        .music-disc-wrapper {
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
-            border: 2px solid #fff;
-            object-fit: cover;
-        }
-
-        .follow-plus {
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #0095f6;
-            color: #fff;
-            border-radius: 50%;
-            width: 16px;
-            height: 16px;
+            background: #262626;
+            border: 4px solid #111;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 12px;
-            font-weight: 700;
+            animation: rotate 3s linear infinite;
+            margin-top: 5px;
+        }
+
+        .music-disc {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
         }
 
         /* Alt Detaylar (Açıklama & Müzik) */
         .reels-details {
             position: absolute;
             left: 16px;
-            bottom: 40px;
+            bottom: 65px;
             right: 80px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
             z-index: 5;
             text-shadow: 0 1px 4px rgba(0,0,0,0.8);
         }
@@ -318,9 +297,17 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             gap: 8px;
         }
 
+        .profile-img-small {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
         .author-name {
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13.5px;
             color: #fff;
         }
 
@@ -328,23 +315,30 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             width: 14px;
             height: 14px;
             fill: #0095f6;
+            flex-shrink: 0;
+        }
+
+        .bullet {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 11px;
         }
 
         .follow-btn {
             background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.5);
             border-radius: 8px;
             color: #fff;
             font-size: 11px;
             font-weight: 600;
             padding: 4px 10px;
             cursor: pointer;
+            outline: none;
         }
 
         .caption-text {
             font-size: 13px;
             line-height: 1.4;
-            color: #e5e5e5;
+            color: #f5f5f5;
             font-weight: 400;
         }
 
@@ -372,6 +366,51 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
         .track-marquee {
             display: inline-block;
             animation: marquee 8s linear infinite;
+        }
+
+        /* --- INSTAGRAM ALT NAVIGASYON BAR --- */
+        .instagram-nav-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background: #000;
+            border-top: 1px solid #1c1c1e;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .nav-icon-link {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+        }
+
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke: #dbdbdb;
+            stroke-width: 2;
+        }
+
+        .nav-icon.filled {
+            fill: #fff;
+            stroke: #fff;
+        }
+
+        .nav-profile-pic {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 1.5px solid #dbdbdb;
+            object-fit: cover;
         }
 
         /* --- GLITCH VE HACK EKRANI --- */
@@ -441,11 +480,11 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             color: var(--terminal-green);
             text-shadow: 0 0 2px var(--terminal-glow);
             overflow-y: auto;
-            scrollbar-width: none; /* Firefox */
+            scrollbar-width: none;
         }
 
         .terminal-screen::-webkit-scrollbar {
-            display: none; /* Safari & Chrome */
+            display: none;
         }
 
         .terminal-header {
@@ -471,7 +510,7 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
 
         .terminal-line.danger {
             color: var(--danger-red);
-            text-shadow: 0 0 2px rgba(255, 56, 56, 0.4);
+            text-shadow: 0 0 2px rgba(255, 48, 64, 0.4);
             font-weight: bold;
         }
 
@@ -710,17 +749,16 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
                 <div class="unmute-text">Sesi Açmak ve İzlemek İçin Dokunun</div>
             </div>
 
-            <!-- Header -->
+            <!-- Header (Instagram Tarzı) -->
             <div class="reels-header">
-                <div class="reels-title">
-                    Reels
-                    <svg viewBox="0 0 24 24"><path d="M8.59 16.59L14.17 11 8.59 5.41 10 4l8 8-8 8-1.41-1.41z"/></svg>
-                </div>
-                <div class="reels-header-icons">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/>
-                    </svg>
-                </div>
+                <svg viewBox="0 0 24 24" class="header-icon" style="transform: rotate(180deg);">
+                    <path d="M8.59 16.59L14.17 11 8.59 5.41 10 4l8 8-8 8-1.41-1.41z"/>
+                </svg>
+                <span class="reels-header-title">Reels</span>
+                <svg viewBox="0 0 24 24" class="header-icon">
+                    <circle cx="12" cy="12" r="3.2"/>
+                    <path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/>
+                </svg>
             </div>
 
             <!-- Video Alanı -->
@@ -731,47 +769,64 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
                 </video>
             </div>
 
-            <!-- Sağ Etkileşim Butonları -->
+            <!-- Sağ Etkileşim Butonları (Instagram ile Birebir) -->
             <div class="reels-actions">
-                <div class="action-item">
-                    <div class="profile-badge">
-                        <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=150&auto=format&fit=crop" class="profile-img" alt="Profil">
-                        <div class="follow-plus">+</div>
-                    </div>
-                </div>
-                
+                <!-- Beğeni (Like) -->
                 <div class="action-item" onclick="likeVideo(this)">
                     <div class="action-icon-wrapper">
-                        <svg viewBox="0 0 24 24" id="heart-icon">
-                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        <svg viewBox="0 0 24 24" id="heart-icon" style="fill: none; stroke: #fff; stroke-width: 2;">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                         </svg>
                     </div>
                     <span id="like-count">346K</span>
                 </div>
 
+                <!-- Yorum (Comment) -->
                 <div class="action-item">
                     <div class="action-icon-wrapper">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM18 14H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+                        <svg viewBox="0 0 24 24" style="fill: none; stroke: #fff; stroke-width: 2;">
+                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
                         </svg>
                     </div>
                     <span>4,291</span>
                 </div>
 
+                <!-- Paylaş (Share) -->
                 <div class="action-item">
                     <div class="action-icon-wrapper">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                        <svg viewBox="0 0 24 24" style="fill: none; stroke: #fff; stroke-width: 2;">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
                         </svg>
                     </div>
                     <span>89.4K</span>
                 </div>
 
+                <!-- Kaydet (Save) -->
+                <div class="action-item" onclick="saveVideo(this)">
+                    <div class="action-icon-wrapper">
+                        <svg viewBox="0 0 24 24" id="bookmark-icon" style="fill: none; stroke: #fff; stroke-width: 2;">
+                            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                    </div>
+                    <span id="save-count">12.4K</span>
+                </div>
+
+                <!-- Seçenekler (More) -->
                 <div class="action-item">
                     <div class="action-icon-wrapper">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                        <svg viewBox="0 0 24 24" style="fill: #fff;">
+                            <circle cx="12" cy="5" r="2"/>
+                            <circle cx="12" cy="12" r="2"/>
+                            <circle cx="12" cy="19" r="2"/>
                         </svg>
+                    </div>
+                </div>
+
+                <!-- Müzik Albüm Plağı -->
+                <div class="action-item">
+                    <div class="music-disc-wrapper">
+                        <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=150&auto=format&fit=crop" class="music-disc" alt="Müzik">
                     </div>
                 </div>
             </div>
@@ -779,10 +834,12 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             <!-- Alt Detay Bilgileri -->
             <div class="reels-details">
                 <div class="author-info">
+                    <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=150&auto=format&fit=crop" class="profile-img-small" alt="Profil">
                     <span class="author-name">kedi_dunyasi</span>
                     <svg class="verified-badge" viewBox="0 0 24 24">
                         <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                     </svg>
+                    <span class="bullet">•</span>
                     <button class="follow-btn">Takip Et</button>
                 </div>
                 <div class="caption-text">
@@ -793,6 +850,38 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
                         <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
                     </svg>
                     <span class="track-marquee">Orijinal Ses - kedi_dunyasi</span>
+                </div>
+            </div>
+
+            <!-- Instagram Alt Barı -->
+            <div class="instagram-nav-bar">
+                <div class="nav-icon-link">
+                    <!-- Home -->
+                    <svg class="nav-icon" viewBox="0 0 24 24">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                    </svg>
+                </div>
+                <div class="nav-icon-link">
+                    <!-- Search -->
+                    <svg class="nav-icon" viewBox="0 0 24 24">
+                        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                    </svg>
+                </div>
+                <div class="nav-icon-link">
+                    <!-- Create -->
+                    <svg class="nav-icon" viewBox="0 0 24 24">
+                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                    </svg>
+                </div>
+                <div class="nav-icon-link">
+                    <!-- Reels (Active/Filled) -->
+                    <svg class="nav-icon filled" viewBox="0 0 24 24">
+                        <path d="M19 4h-2V2h-2v2H9V2H7v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V8h14v12zm-5-8l-4-2.5v5l4-2.5z"/>
+                    </svg>
+                </div>
+                <div class="nav-icon-link">
+                    <!-- Profile circular placeholder -->
+                    <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=150&auto=format&fit=crop" class="nav-profile-pic" alt="Profil">
                 </div>
             </div>
 
@@ -891,7 +980,6 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
                 osc.type = 'sine';
-                // 1000Hz ile 1500Hz arasında rastgele frekansta çıtırtı
                 osc.frequency.setValueAtTime(800 + Math.random() * 600, audioCtx.currentTime);
                 gain.gain.setValueAtTime(0.008, audioCtx.currentTime);
                 gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.02);
@@ -984,12 +1072,33 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             const count = document.getElementById('like-count');
             if (liked) {
                 heart.style.fill = 'var(--danger-red)';
+                heart.style.stroke = 'var(--danger-red)';
                 count.innerText = "347K";
                 heart.style.transform = "scale(1.2)";
                 setTimeout(() => heart.style.transform = "scale(1)", 150);
             } else {
-                heart.style.fill = '#fff';
+                heart.style.fill = 'none';
+                heart.style.stroke = '#fff';
                 count.innerText = "346K";
+            }
+        }
+
+        // Reels Kaydet Simülasyonu
+        let saved = false;
+        function saveVideo(element) {
+            saved = !saved;
+            const bookmark = document.getElementById('bookmark-icon');
+            const count = document.getElementById('save-count');
+            if (saved) {
+                bookmark.style.fill = '#fff';
+                bookmark.style.stroke = '#fff';
+                count.innerText = "12.5K";
+                bookmark.style.transform = "scale(1.2)";
+                setTimeout(() => bookmark.style.transform = "scale(1)", 150);
+            } else {
+                bookmark.style.fill = 'none';
+                bookmark.style.stroke = '#fff';
+                count.innerText = "12.4K";
             }
         }
 
