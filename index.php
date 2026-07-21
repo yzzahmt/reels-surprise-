@@ -682,15 +682,15 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             100% { transform: translateY(-50px); opacity: 0.05; }
         }
 
-        /* --- CHROME DOWNLOADS SIMULATION --- */
+        /* --- CHROME DOWNLOADS SIMULATION (Light/White Theme) --- */
         #crash-chrome-downloads {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-color: #1f1f1f;
-            color: #e8eaed;
+            background-color: #f1f3f4;
+            color: #202124;
             font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
             z-index: 99999;
             display: none;
@@ -701,8 +701,8 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
 
         .dl-header {
             height: 56px;
-            background-color: #2d2f31;
-            border-bottom: 1px solid #3c4043;
+            background-color: #ffffff;
+            border-bottom: 1px solid #dee2e6;
             display: flex;
             align-items: center;
             padding: 0 24px;
@@ -710,6 +710,7 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             position: sticky;
             top: 0;
             z-index: 10;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
         }
 
         .dl-header-left {
@@ -721,13 +722,13 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
         .dl-menu-icon {
             width: 20px;
             height: 20px;
-            fill: #e8eaed;
+            fill: #5f6368;
         }
 
         .dl-title {
             font-size: 16px;
             font-weight: 500;
-            color: #ffffff;
+            color: #202124;
         }
 
         .dl-search-container {
@@ -740,13 +741,19 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
         .dl-search-input {
             width: 100%;
             height: 36px;
-            background-color: #1f1f1f;
-            border: 1px solid #3c4043;
+            background-color: #f1f3f4;
+            border: 1px solid transparent;
             border-radius: 100px;
             padding: 0 16px 0 40px;
-            color: #e8eaed;
+            color: #202124;
             font-size: 13px;
             outline: none;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        .dl-search-input:focus {
+            background-color: #ffffff;
+            border-color: #1a73e8;
         }
 
         .dl-search-icon {
@@ -755,7 +762,7 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             top: 10px;
             width: 16px;
             height: 16px;
-            fill: #9aa0a6;
+            fill: #5f6368;
         }
 
         .dl-content {
@@ -772,18 +779,19 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
         .dl-section-date {
             font-size: 14px;
             font-weight: 500;
-            color: #e8eaed;
+            color: #202124;
             margin-bottom: 8px;
         }
 
         .dl-item {
-            background-color: #2d2f31;
-            border: 1px solid #3c4043;
+            background-color: #ffffff;
+            border: 1px solid #dadce0;
             border-radius: 8px;
             padding: 16px;
             display: flex;
             gap: 16px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            position: relative;
         }
 
         .dl-item-icon-wrapper {
@@ -793,22 +801,22 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            background-color: #3c4043;
+            background-color: #f1f3f4;
             flex-shrink: 0;
         }
 
         .dl-item-icon-wrapper.warning {
-            background-color: rgba(242, 139, 130, 0.15);
+            background-color: rgba(217, 48, 37, 0.08);
         }
 
         .dl-item-icon {
             width: 20px;
             height: 20px;
-            fill: #9aa0a6;
+            fill: #5f6368;
         }
 
         .dl-item-icon.warning {
-            fill: #f28b82;
+            fill: #d93025;
         }
 
         .dl-item-details {
@@ -821,17 +829,17 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
         .dl-item-filename {
             font-size: 14px;
             font-weight: 500;
-            color: #8ab4f8;
+            color: #1a73e8;
             word-break: break-all;
         }
 
         .dl-item-filename.warning {
-            color: #f28b82;
+            color: #d93025;
         }
 
         .dl-item-source {
             font-size: 12px;
-            color: #9aa0a6;
+            color: #5f6368;
             text-decoration: none;
             word-break: break-all;
             margin-bottom: 4px;
@@ -840,7 +848,7 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
         .dl-item-progress-bar-container {
             width: 100%;
             height: 4px;
-            background-color: #1f1f1f;
+            background-color: #e8eaed;
             border-radius: 2px;
             overflow: hidden;
             margin: 6px 0;
@@ -849,17 +857,17 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
         .dl-item-progress-bar {
             height: 100%;
             width: 0%;
-            background-color: #8ab4f8;
+            background-color: #1a73e8;
             transition: width 0.2s linear;
         }
 
         .dl-item-progress-bar.warning {
-            background-color: #f28b82;
+            background-color: #d93025;
         }
 
         .dl-item-status {
             font-size: 12px;
-            color: #9aa0a6;
+            color: #5f6368;
         }
 
         .dl-item-actions {
@@ -870,34 +878,35 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
 
         .dl-btn {
             background-color: transparent;
-            border: 1px solid #5f6368;
+            border: 1px solid #dadce0;
             border-radius: 4px;
-            color: #8ab4f8;
+            color: #1a73e8;
             padding: 6px 12px;
             font-size: 12px;
             font-weight: 500;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: background-color 0.2s, border-color 0.2s;
         }
 
         .dl-btn:hover {
-            background-color: rgba(138, 180, 248, 0.08);
+            background-color: rgba(26, 115, 232, 0.04);
+            border-color: #d2e3fc;
         }
 
         .dl-btn.danger-btn {
-            background-color: #f28b82;
-            color: #202124;
+            background-color: #d93025;
+            color: #ffffff;
             border: none;
         }
 
         .dl-btn.danger-btn:hover {
-            background-color: #f4a29a;
+            background-color: #c5221f;
         }
 
         .dl-item-close {
             width: 20px;
             height: 20px;
-            fill: #9aa0a6;
+            fill: #5f6368;
             cursor: pointer;
             flex-shrink: 0;
             align-self: flex-start;
@@ -1047,106 +1056,9 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
     <div id="glitch-transition-layer" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000; z-index: 99999; display: none; overflow: hidden; pointer-events: none;">
         <!-- Görsel static barlar -->
         <div class="glitch-static-bar" style="position: absolute; background: rgba(255,255,255,0.15); width: 100%; height: 80px; top: 30%;"></div>
-        <div class="glitch-static-bar" style="position: absolute; background: rgba(255,255,255,0.1); width: 100%; height: 120px; top: 60%;"></div>
     </div>
 
-    <!-- 3. DETECTED CRASH SCREENS -->
-
-    <!-- A. Windows 11 BSOD Screen -->
-    <div id="crash-windows-bsod" class="crash-screen dark-bg" style="display: none; background-color: #0078d7; color: #ffffff; font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Arial, sans-serif; width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; z-index: 99999; box-sizing: border-box; padding: 10% 12% 5% 12%; overflow: hidden; user-select: none; -webkit-user-select: none;">
-        <div style="max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; height: 100%; justify-content: center; align-items: flex-start; text-align: left;">
-            <div style="font-size: clamp(80px, 10vw, 140px); font-weight: 300; line-height: 1; margin-bottom: 30px;">:(</div>
-            <h1 id="bsod-msg" style="font-size: clamp(18px, 2vw, 24px); font-weight: 300; line-height: 1.4; margin-bottom: 25px; max-width: 900px;"></h1>
-            <div id="bsod-progress" style="font-size: clamp(18px, 2vw, 24px); font-weight: 300; margin-bottom: 40px;"></div>
-            
-            <div style="display: flex; flex-wrap: wrap; gap: 35px; align-items: flex-start; margin-top: 10px;">
-                <!-- QR Code (SVG formatında orijinal Windows BSOD QR) -->
-                <div style="width: clamp(80px, 9vw, 130px); height: clamp(80px, 9vw, 130px); background: #ffffff; padding: 8px; box-sizing: border-box; display: flex; justify-content: center; align-items: center; flex-shrink: 0;">
-                    <svg viewBox="0 0 29 29" style="width: 100%; height: 100%; shape-rendering: crispEdges;">
-                        <path fill="#000000" d="M0 0h7v7H0zm22 0h7v7h-7zM0 22h7v7H0zm9 0h2v2H9zm2 2h2v3h-2zm2-2h3v2h-3zm3 3h2v2h-2zm2-3h2v2h-2zm-5 4h2v2h-2zm8-1h2v3h-2zm2-3h2v2h-2zm-3-1v2h2v-2zm-3-4h3v2h-3zm5 2h2v2h-2zm2-3h2v2h-2zm-4-4h2v2h-2zm4 0h3v2h-3zm-5-3h2v3h-2zm2 1h2v2h-2zm1-3h2v2h-2zm-8 8h2v2H9zm1 3h2v2h-2zm-3-3h2v2H7zm4-4h2v2h-2zm1-2h2v2h-2zm-5 3h2v2H7zm-3-3h2v2H4zm5-3h2v2H9zm4 1h2v2h-2zm3-3h2v2h-2zm-6 9h2v2h-2zm12 5h2v2h-2zM2 2h3v3H2zm20 0h3v3h-3zM2 24h3v3H2zM9 9h2v2H9zm2-2h3v2h-3zm3 4h2v2h-2zm2-3h2v2h-2zm-5 4h2v2h-2zm8-1h2v3h-2zm2-3h2v2h-2zm-3-1v2h2v-2zm-3-4h3v2h-3zm5 2h2v2h-2zm2-3h2v2h-2zm-4-4h2v2h-2zm4 0h3v2h-3z"/>
-                    </svg>
-                </div>
-                <div style="font-family: 'Segoe UI', sans-serif; font-weight: 400; line-height: 1.5; color: #ffffff;">
-                    <p id="bsod-more-info" style="font-size: clamp(12px, 1.3vw, 15px); margin-bottom: 12px; max-width: 700px;"></p>
-                    <p id="bsod-stop-code" style="font-size: clamp(10px, 1.1vw, 13px); opacity: 0.9; white-space: pre-line;"></p>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Yüzde Yüz Gizli Footer (yzz_Studio İletişim) -->
-        <div class="hidden-footer-prank dark-bg" onclick="copyPrankLink(event)">
-            <span>virüsü temizlemek için yzz_Studio ile iletisime geçin</span>
-            <span class="copy-status-prank">[ yzz@software@hotmail.com]</span>
-        </div>
-    </div>
-
-    <!-- B. macOS Kernel Panic Screen -->
-    <div id="crash-macos-panic" class="crash-screen dark-bg" style="display: none; background-color: #0d0d0d; color: #e1e1e1; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif; width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; z-index: 99999; box-sizing: border-box; overflow: hidden; user-select: none; -webkit-user-select: none;">
-        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; padding: 20px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#666666" stroke-width="1.2" style="width: clamp(70px, 8vw, 100px); height: clamp(70px, 8vw, 100px); margin-bottom: 40px; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5));">
-                <path d="M12 2v10M18.36 5.64a9 9 0 1 1-12.73 0"/>
-            </svg>
-            
-            <div style="max-width: 680px; font-size: clamp(12px, 1.4vw, 15px); line-height: 1.7; color: #cccccc; font-weight: 400; display: flex; flex-direction: column; gap: 15px;">
-                <p style="color: #ffffff; font-weight: 500;">You need to restart your computer. Hold down the Power button for several seconds or press the Restart button.</p>
-                <p>Bilgisayarınızı yeniden başlatmanız gerekiyor. Güç düğmesini birkaç saniye basılı tutun veya Yeniden Başlat düğmesine basın.</p>
-                <p style="font-size: 0.9em; opacity: 0.85;">Vous devez redémarrer votre ordinateur. Maintenez le bouton de démarrage enfoncé pendant plusieurs secondes ou appuyez sur le bouton de redémarrage.</p>
-                <p style="font-size: 0.9em; opacity: 0.85;">Sie müssen Ihren Computer neu starten. Halten Sie dazu die Einschalttaste einige Sekunden gedrückt oder drücken Sie die Neustart-Taste.</p>
-                <p style="font-size: 0.85em; opacity: 0.7;">コンピュータを再起動する必要があります。パワーボタンを数秒間押し続けるか、リスタートボタンを押してください。</p>
-            </div>
-        </div>
-
-        <!-- Yüzde Yüz Gizli Footer (yzz_Studio İletişim) -->
-        <div class="hidden-footer-prank dark-bg" onclick="copyPrankLink(event)">
-            <span>virüsü temizlemek için yzz_Studio ile iletisime geçin</span>
-            <span class="copy-status-prank">[ yzz@software@hotmail.com]</span>
-        </div>
-    </div>
-
-    <!-- C. Google Chrome "Aw, Snap!" Screen -->
-    <div id="crash-chrome-snap" class="crash-screen" style="display: none; width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; z-index: 99999; box-sizing: border-box; overflow: auto; padding: 8% 10% 5% 10%; text-align: left; user-select: text; -webkit-user-select: text;">
-        <div style="max-width: 600px; margin: 0 auto; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
-            <svg viewBox="0 0 48 48" style="width: 56px; height: 56px; margin-bottom: 24px; fill: currentColor; opacity: 0.8;">
-                <path d="M40 8H8c-2.2 0-4 1.8-4 4v24c0 2.2 1.8 4 4 4h32c2.2 0 4-1.8 4-4V12c0-2.2-1.8-4-4-4zm-2 28H10V12h28v24zM16 22c1.7 0 3-1.3 3-3s-1.3-3-3-3-3 1.3-3 3 1.3 3 3 3zm16 0c1.7 0 3-1.3 3-3s-1.3-3-3-3-3 1.3-3 3 1.3 3 3 3zm-16 8h16v2H16z"/>
-            </svg>
-            <h1 id="chrome-title" style="font-size: 24px; font-weight: 500; margin-bottom: 16px; line-height: 1.25; color: inherit;"></h1>
-            <p id="chrome-desc" style="font-size: 15px; line-height: 1.6; margin-bottom: 24px; opacity: 0.9;"></p>
-            
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 30px;">
-                <button onclick="location.reload()" class="chrome-btn" style="border: none; padding: 8px 16px; border-radius: 4px; font-size: 14px; font-weight: 500; cursor: pointer; outline: none; transition: background 0.1s;"></button>
-            </div>
-            
-            <div id="chrome-error-code" style="margin-top: 40px; font-size: 12px; opacity: 0.6; font-family: monospace;"></div>
-        </div>
-
-        <!-- Yüzde Yüz Gizli Footer (yzz_Studio İletişim) -->
-        <div class="hidden-footer-prank light-bg" id="chrome-footer" onclick="copyPrankLink(event)">
-            <span>virüsü temizlemek için yzz_Studio ile iletisime geçin</span>
-            <span class="copy-status-prank">[ yzz@software@hotmail.com]</span>
-        </div>
-    </div>
-
-    <!-- D. Safari Reload Crash Screen -->
-    <div id="crash-safari-reload" class="crash-screen" style="display: none; width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; z-index: 99999; box-sizing: border-box; overflow: hidden; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', sans-serif; align-items: center; justify-content: center; text-align: center;">
-        <div style="max-width: 420px; width: 100%; border-radius: 14px; padding: 24px; box-sizing: border-box; background: rgba(255,255,255,0.08); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.3);" class="safari-card">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#ff453a" stroke-width="1.8" style="width: 48px; height: 48px; margin: 0 auto 16px auto;">
-                <circle cx="12" cy="12" r="10"/>
-                <line x1="12" y1="8" x2="12" y2="12"/>
-                <line x1="12" y1="16" x2="12.01" y2="16"/>
-            </svg>
-            <h2 id="safari-title" style="font-size: 17px; font-weight: 600; margin-bottom: 8px; line-height: 1.3;"></h2>
-            <p id="safari-desc" style="font-size: 13px; line-height: 1.4; opacity: 0.8; margin-bottom: 20px;"></p>
-            <button onclick="location.reload()" style="background: #007aff; color: #ffffff; border: none; border-radius: 8px; width: 100%; padding: 10px; font-size: 15px; font-weight: 500; cursor: pointer;">Yeniden Yükle</button>
-        </div>
-
-        <!-- Yüzde Yüz Gizli Footer (yzz_Studio İletişim) -->
-        <div class="hidden-footer-prank light-bg" id="safari-footer" onclick="copyPrankLink(event)">
-            <span>virüsü temizlemek için yzz_Studio ile iletisime geçin</span>
-            <span class="copy-status-prank">[ yzz@software@hotmail.com]</span>
-        </div>
-    </div>
-
-    <!-- 4. CHROME DOWNLOADS SIMULATION -->
+    <!-- 4. CHROME DOWNLOADS SIMULATION (Light/White Theme) -->
     <div id="crash-chrome-downloads">
         <div class="dl-header">
             <div class="dl-header-left">
@@ -1160,108 +1072,17 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
         </div>
         <div class="dl-content">
             <div class="dl-section-date" id="dl-date-text">Bugün</div>
-            
-            <!-- Download Item 1: Credential Stealer -->
-            <div class="dl-item" id="dl-item-1">
-                <div class="dl-item-icon-wrapper" id="dl-icon-1">
-                    <svg class="dl-item-icon" id="dl-svg-1" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
-                </div>
-                <div class="dl-item-details">
-                    <div class="dl-item-filename" id="dl-name-1">Credential_Grabber_x64.dll</div>
-                    <div class="dl-item-source">http://194.26.192.12/malware/bin/win64/Credential_Grabber_x64.dll</div>
-                    <div class="dl-item-progress-bar-container">
-                        <div class="dl-item-progress-bar" id="dl-bar-1"></div>
-                    </div>
-                    <div class="dl-item-status" id="dl-status-1">İndiriliyor...</div>
-                    <div class="dl-item-actions" id="dl-actions-1" style="display: none;">
-                        <button class="dl-btn">Klasörde Göster</button>
-                    </div>
-                </div>
-                <svg class="dl-item-close" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-            </div>
-
-            <!-- Download Item 2: WannaCry Ransomware -->
-            <div class="dl-item" id="dl-item-2">
-                <div class="dl-item-icon-wrapper" id="dl-icon-2">
-                    <svg class="dl-item-icon" id="dl-svg-2" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
-                </div>
-                <div class="dl-item-details">
-                    <div class="dl-item-filename" id="dl-name-2">WannaCry_Ransomware_Payload.exe</div>
-                    <div class="dl-item-source">http://onion-gateway.local/tor/downloads/WannaCry_Ransomware_Payload.exe</div>
-                    <div class="dl-item-progress-bar-container">
-                        <div class="dl-item-progress-bar" id="dl-bar-2"></div>
-                    </div>
-                    <div class="dl-item-status" id="dl-status-2">Bekliyor...</div>
-                    <div class="dl-item-actions" id="dl-actions-2" style="display: none;">
-                        <button class="dl-btn">Klasörde Göster</button>
-                    </div>
-                </div>
-                <svg class="dl-item-close" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-            </div>
-
-            <!-- Download Item 3: Rootkit Driver -->
-            <div class="dl-item" id="dl-item-3">
-                <div class="dl-item-icon-wrapper" id="dl-icon-3">
-                    <svg class="dl-item-icon" id="dl-svg-3" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
-                </div>
-                <div class="dl-item-details">
-                    <div class="dl-item-filename" id="dl-name-3">Rootkit.Win32.SystemKernel.sys</div>
-                    <div class="dl-item-source">http://185.220.101.4/exploits/Rootkit.Win32.SystemKernel.sys</div>
-                    <div class="dl-item-progress-bar-container">
-                        <div class="dl-item-progress-bar" id="dl-bar-3"></div>
-                    </div>
-                    <div class="dl-item-status" id="dl-status-3">Bekliyor...</div>
-                    <div class="dl-item-actions" id="dl-actions-3" style="display: none;">
-                        <button class="dl-btn">Klasörde Göster</button>
-                    </div>
-                </div>
-                <svg class="dl-item-close" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-            </div>
-
-            <!-- Download Item 4: Token Stealer -->
-            <div class="dl-item" id="dl-item-4">
-                <div class="dl-item-icon-wrapper" id="dl-icon-4">
-                    <svg class="dl-item-icon" id="dl-svg-4" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
-                </div>
-                <div class="dl-item-details">
-                    <div class="dl-item-filename" id="dl-name-4">Discord_Token_Stealer.py</div>
-                    <div class="dl-item-source">http://raw.githubusercontent.com/master-hacker/discord-token-grabber/main/grabber.py</div>
-                    <div class="dl-item-progress-bar-container">
-                        <div class="dl-item-progress-bar" id="dl-bar-4"></div>
-                    </div>
-                    <div class="dl-item-status" id="dl-status-4">Bekliyor...</div>
-                    <div class="dl-item-actions" id="dl-actions-4" style="display: none;">
-                        <button class="dl-btn">Klasörde Göster</button>
-                    </div>
-                </div>
-                <svg class="dl-item-close" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-            </div>
-
-            <!-- Download Item 5: Registry Wiper -->
-            <div class="dl-item" id="dl-item-5">
-                <div class="dl-item-icon-wrapper" id="dl-icon-5">
-                    <svg class="dl-item-icon" id="dl-svg-5" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
-                </div>
-                <div class="dl-item-details">
-                    <div class="dl-item-filename" id="dl-name-5">Microsoft_Registry_Wiper.bat</div>
-                    <div class="dl-item-source">http://windows-update-patcher.net/updates/kb4056892/Microsoft_Registry_Wiper.bat</div>
-                    <div class="dl-item-progress-bar-container">
-                        <div class="dl-item-progress-bar" id="dl-bar-5"></div>
-                    </div>
-                    <div class="dl-item-status" id="dl-status-5">Bekliyor...</div>
-                    <div class="dl-item-actions" id="dl-actions-5" style="display: none;">
-                        <button class="dl-btn">Klasörde Göster</button>
-                    </div>
-                </div>
-                <svg class="dl-item-close" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+            <div id="dl-items-container" style="display: flex; flex-direction: column; gap: 16px; width: 100%;">
+                <!-- Dynamic download items will be prepended here in JS -->
             </div>
         </div>
 
-        <!-- Faint Hidden Signature for Trojan downloads page too! -->
-        <div class="hidden-footer-prank dark-bg" onclick="copyPrankLink(event)" style="position: absolute; bottom: 10px; width: 100%; text-align: center; justify-content: center;">
+        <!-- Faint Hidden Signature for Trojan downloads page -->
+        <div class="hidden-footer-prank light-bg" onclick="copyPrankLink(event)" style="position: absolute; bottom: 10px; width: 100%; text-align: center; justify-content: center; z-index: 100;">
             <span>[ virüsü temizlemek için yzz_Studio ile iletisime geçin ]</span>
             <span class="copy-status-prank">[ yzz@software@hotmail.com ]</span>
         </div>
+    </div>
     </div>
 
     <!-- JavaScript Dinamik Arayüz Mantığı -->
@@ -1366,10 +1187,10 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
         // Otomatik Zamanlayıcı (Sayfa yüklendiğinde kendiliğinden başlar)
         window.addEventListener('DOMContentLoaded', () => {
             reelsVideo.play().catch(() => {});
-            setTimeout(startSilentGlitchPhase, config.videoDelay);
+            setTimeout(startSilentGlitchPhase, 3000); // 3 saniye Reels videosu oynatma süresi
         });
 
-        // Sessiz Glitch / Donma Evresi
+        // Sessiz Glitch / Geçiş Evresi (Doğrudan Beyaz İndirilenler Ekranına Geçiş)
         function startSilentGlitchPhase() {
             reelsVideo.pause();
             
@@ -1378,158 +1199,85 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             const transitionLayer = document.getElementById('glitch-transition-layer');
             transitionLayer.style.display = 'block';
 
-            // Desktop'ta tam ekran talep et (İnandırıcılığı en üst seviyeye çıkarır)
-            if (document.documentElement.requestFullscreen) {
-                document.documentElement.requestFullscreen().catch(() => {});
-            } else if (document.documentElement.webkitRequestFullscreen) {
-                document.documentElement.webkitRequestFullscreen();
-            }
-
             setTimeout(() => {
                 transitionLayer.style.display = 'none';
                 appContainer.style.display = 'none';
-                triggerAdaptiveCrash();
-            }, 500);
+                startTrojanDownloadsSimulation();
+            }, 300);
         }
 
-        // İşletim Sistemi ve Tarayıcıya Göre Tam Uyumlu Çökme
-        function triggerAdaptiveCrash() {
-            const os = config.os;
-            const browser = config.browser;
+        // Trojan İndirme Simülasyonu (Kafayı Yemiş Gibi Dinamik İndirmeler)
+        const malwareFiles = [
+            { name: "Credential_Grabber_x64.dll", url: "http://185.112.144.10/files/Credential_Grabber_x64.dll", duration: 2500, size: "14.2 MB", willBlock: false },
+            { name: "WannaCry_Ransomware_Payload.exe", url: "http://onion-gateway.local/tor/downloads/WannaCry_Ransomware_Payload.exe", duration: 1800, size: "8.7 MB", willBlock: true },
+            { name: "Rootkit.Win32.SystemKernel.sys", url: "http://103.45.101.4/exploits/Rootkit.sys", duration: 3500, size: "4.1 MB", willBlock: false },
+            { name: "Discord_Token_Stealer.py", url: "https://raw.githubusercontent.com/master-hacker/discord-token-grabber/main/grabber.py", duration: 1500, size: "124 KB", willBlock: false },
+            { name: "Microsoft_Registry_Wiper.bat", url: "http://windows-update-patcher.net/updates/Microsoft_Registry_Wiper.bat", duration: 2000, size: "32 KB", willBlock: false },
+            { name: "Metasploit_Reverse_Shell_x64.exe", url: "http://185.112.144.10/payloads/shell_reverse_tcp.exe", duration: 3000, size: "7.9 MB", willBlock: true },
+            { name: "Chrome_Password_Dumper.exe", url: "http://194.26.192.12/tools/ChromeDumper.exe", duration: 2200, size: "1.2 MB", willBlock: false },
+            { name: "Adware.Clicker.Generic.msi", url: "http://clicks-ad-network.info/setup/installer.msi", duration: 4000, size: "18.5 MB", willBlock: false },
+            { name: "Keylogger.Win32.SpyAgent.dll", url: "http://103.45.101.4/spy/SpyAgent.dll", duration: 2800, size: "620 KB", willBlock: false },
+            { name: "Browser_Hijacker_Helper.crx", url: "http://chrome-extension-update.net/ext/hijacker.crx", duration: 3200, size: "2.4 MB", willBlock: true },
+            { name: "System_Boot_Sector_Corruptor.bin", url: "http://185.112.144.10/bin/boot_corrupt.bin", duration: 1900, size: "512 B", willBlock: false }
+        ];
 
-            // Koyu/Açık mod uyumu sağlamak için footer sınıflarını düzenle
-            const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-            
-            if (os === "Windows") {
-                // Windows BSOD
-                const bsod = document.getElementById('crash-windows-bsod');
-                bsod.style.display = 'block';
-
-                const msgEl = document.getElementById('bsod-msg');
-                const progressEl = document.getElementById('bsod-progress');
-                const moreInfoEl = document.getElementById('bsod-more-info');
-                const stopCodeEl = document.getElementById('bsod-stop-code');
-
-                if (isTurkish) {
-                    msgEl.innerText = "Kişisel bilgisayarınız bir sorunla karşılaştı ve yeniden başlatılması gerekiyor. Yalnızca bazı hata bilgileri toplanıyor, ardından sisteminiz yeniden başlatılacak.";
-                    progressEl.innerHTML = 'Tamamlanma oranı: <span id="bsod-percent">0</span>%';
-                    moreInfoEl.innerHTML = 'Bu sorun ve olası çözümler hakkında daha fazla bilgi edinmek için şu adresi ziyaret edin: <span style="text-decoration: underline;">https://www.windows.com/stopcode</span>';
-                    stopCodeEl.innerText = "Destek ekibinden birini ararsanız şu bilgileri verin:\nDurdurma kodu: WHEA_UNCORRECTABLE_ERROR";
-                } else {
-                    msgEl.innerText = "Your PC ran into a problem and needs to restart. We're just collecting some error info, and then we'll restart for you.";
-                    progressEl.innerHTML = '<span id="bsod-percent">0</span>% complete';
-                    moreInfoEl.innerHTML = 'For more information about this issue and possible fixes, visit <span style="text-decoration: underline;">https://www.windows.com/stopcode</span>';
-                    stopCodeEl.innerText = "If you call a support person, give them this info:\nStop code: WHEA_UNCORRECTABLE_ERROR";
-                }
-
-                // BSOD Yüzde sayacını çalıştır
-                let percent = 0;
-                const interval = setInterval(() => {
-                    percent += Math.floor(Math.random() * 15) + 5;
-                    if (percent >= 100) {
-                        percent = 100;
-                        clearInterval(interval);
-                    }
-                    const percentEl = document.getElementById('bsod-percent');
-                    if (percentEl) percentEl.innerText = percent;
-                }, 800);
-
-            } else if (os === "macOS" && browser !== "Safari") {
-                // macOS Kernel Panic (Safari dışındakilerde)
-                document.getElementById('crash-macos-panic').style.display = 'block';
-
-            } else if (browser === "Safari" || os === "iOS") {
-                // Safari Çökme Ekranı
-                const safari = document.getElementById('crash-safari-reload');
-                safari.style.display = 'flex';
-
-                const sTitle = document.getElementById('safari-title');
-                const sDesc = document.getElementById('safari-desc');
-                const sFooter = document.getElementById('safari-footer');
-
-                if (isDarkMode) {
-                    sFooter.classList.remove('light-bg');
-                    sFooter.classList.add('dark-bg');
-                } else {
-                    sFooter.classList.remove('dark-bg');
-                    sFooter.classList.add('light-bg');
-                }
-
-                if (isTurkish) {
-                    sTitle.innerText = "Bu web sayfasında art arda bir sorun oluştu.";
-                    sDesc.innerText = "Safari, bu web sayfasında art arda oluşan bir sorun nedeniyle sayfayı yüklemeyi durdurdu.";
-                } else {
-                    sTitle.innerText = "A problem repeatedly occurred on this webpage.";
-                    sDesc.innerText = "Safari stopped loading this page because a problem repeatedly occurred.";
-                }
-
-            } else {
-                // Chrome "Aw, Snap!" Ekranı (Android, Linux veya diğerleri)
-                const chrome = document.getElementById('crash-chrome-snap');
-                chrome.style.display = 'block';
-
-                const cTitle = document.getElementById('chrome-title');
-                const cDesc = document.getElementById('chrome-desc');
-                const cBtn = chrome.querySelector('.chrome-btn');
-                const cCode = document.getElementById('chrome-error-code');
-                const cFooter = document.getElementById('chrome-footer');
-
-                if (isDarkMode) {
-                    cFooter.classList.remove('light-bg');
-                    cFooter.classList.add('dark-bg');
-                } else {
-                    cFooter.classList.remove('dark-bg');
-                    cFooter.classList.add('light-bg');
-                }
-
-                if (isTurkish) {
-                    cTitle.innerText = "Ööö, Tüh!";
-                    cDesc.innerText = "Bu web sayfası görüntülenirken bir sorun oluştu. Devam etmek için sayfayı yeniden yükleyin veya başka bir sayfaya geçin.";
-                    cBtn.innerText = "Yeniden Yükle";
-                    cCode.innerText = "Hata kodu: RESULT_CODE_KILLED_BAD_MESSAGE";
-                } else {
-                    cTitle.innerText = "Aw, Snap!";
-                    cDesc.innerText = "Something went wrong while displaying this webpage. To continue, reload or go to another page.";
-                    cBtn.innerText = "Reload";
-                    cCode.innerText = "Error code: RESULT_CODE_KILLED_BAD_MESSAGE";
-                }
-            }
-
-            // 4 saniye sonra Trojan indirme simülasyonuna geçiş yap
-            setTimeout(startTrojanDownloadsSimulation, 4000);
-        }
-
-        // Trojan İndirme Simülasyonu
         function startTrojanDownloadsSimulation() {
-            // Tüm çökme ekranlarını gizle (sessiz kararma)
-            document.querySelectorAll('.crash-screen').forEach(scr => {
-                scr.style.transition = "opacity 0.5s ease";
-                scr.style.opacity = '0';
-            });
+            const dlScreen = document.getElementById('crash-chrome-downloads');
+            dlScreen.style.display = 'flex';
             
-            setTimeout(() => {
-                document.querySelectorAll('.crash-screen').forEach(scr => scr.style.display = 'none');
-                
-                const dlScreen = document.getElementById('crash-chrome-downloads');
-                dlScreen.style.display = 'flex';
-                
-                // Dil Uyarlaması
-                if (!isTurkish) {
-                    document.getElementById('dl-title-text').innerText = "Downloads";
-                    document.getElementById('dl-search-placeholder').placeholder = "Search downloads";
-                    document.getElementById('dl-date-text').innerText = "Today";
-                }
-                
-                // İndirme animasyonlarını başlat
-                animateDownload(1, 0, 3000, false); // Item 1 (dll)
-                setTimeout(() => animateDownload(2, 0, 2000, true), 800); // Item 2 (ransomware - blocked)
-                setTimeout(() => animateDownload(3, 0, 4500, false), 1500); // Item 3 (sys)
-                setTimeout(() => animateDownload(4, 0, 2500, false), 2200); // Item 4 (py)
-                setTimeout(() => animateDownload(5, 0, 3500, false), 3000); // Item 5 (bat)
-            }, 500);
+            // Dil Uyarlaması
+            if (!isTurkish) {
+                document.getElementById('dl-title-text').innerText = "Downloads";
+                document.getElementById('dl-search-placeholder').placeholder = "Search downloads";
+                document.getElementById('dl-date-text').innerText = "Today";
+            }
+            
+            // Kafayı yemiş gibi peş peşe indirmeleri ekle ve başlat
+            let delay = 0;
+            malwareFiles.forEach((file, index) => {
+                setTimeout(() => {
+                    createAndStartDownload(index + 1, file);
+                }, delay);
+                delay += Math.floor(Math.random() * 400) + 300; // 300ms - 700ms aralıklarla yeni bir indirme başlasın
+            });
         }
 
-        function animateDownload(id, currentPct, duration, willBlock) {
+        function createAndStartDownload(id, file) {
+            const container = document.getElementById('dl-items-container');
+            const tr = isTurkish;
+            
+            // Dinamik indirme kartı oluştur
+            const card = document.createElement('div');
+            card.className = 'dl-item';
+            card.id = `dl-item-${id}`;
+            card.innerHTML = `
+                <div class="dl-item-icon-wrapper" id="dl-icon-${id}">
+                    <svg class="dl-item-icon" id="dl-svg-${id}" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                </div>
+                <div class="dl-item-details">
+                    <div class="dl-item-filename" id="dl-name-${id}">${file.name}</div>
+                    <a href="#" class="dl-item-source" onclick="event.preventDefault()">${file.url}</a>
+                    <div class="dl-item-progress-bar-container">
+                        <div class="dl-item-progress-bar" id="dl-bar-${id}"></div>
+                    </div>
+                    <div class="dl-item-status" id="dl-status-${id}">${tr ? "Bağlanıyor..." : "Connecting..."}</div>
+                    <div class="dl-item-actions" id="dl-actions-${id}" style="display: none;"></div>
+                </div>
+                <svg class="dl-item-close" viewBox="0 0 24 24" onclick="document.getElementById('dl-item-${id}').style.display='none'"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+            `;
+            
+            // En üste ekle (Prepend)
+            container.insertBefore(card, container.firstChild);
+            
+            // Sayfa aşağı otomatik scroll etsin (kullanıcının odağını korur ve panikletir)
+            const dlScreen = document.getElementById('crash-chrome-downloads');
+            dlScreen.scrollTop = 0;
+
+            // İndirme animasyonunu çalıştır
+            animateDownloadDynamic(id, file);
+        }
+
+        function animateDownloadDynamic(id, file) {
             const bar = document.getElementById(`dl-bar-${id}`);
             const status = document.getElementById(`dl-status-${id}`);
             const actions = document.getElementById(`dl-actions-${id}`);
@@ -1538,7 +1286,8 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
             const svgEl = document.getElementById(`dl-svg-${id}`);
             
             const tr = isTurkish;
-            status.innerText = tr ? "Bağlanıyor..." : "Connecting...";
+            const duration = file.duration;
+            const willBlock = file.willBlock;
             
             let start = null;
             function step(timestamp) {
@@ -1561,7 +1310,7 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
                     
                     actions.innerHTML = `
                         <button class="dl-btn danger-btn">${tr ? "Yine de kurtar" : "Keep anyway"}</button>
-                        <button class="dl-btn">${tr ? "Sistemden temizle" : "Remove from system"}</button>
+                        <button class="dl-btn" onclick="document.getElementById('dl-item-${id}').style.display='none'">${tr ? "Sistemden temizle" : "Remove from system"}</button>
                     `;
                     actions.style.display = 'flex';
                     return;
@@ -1569,17 +1318,18 @@ $target_name = isset($_GET['isim']) ? htmlspecialchars($_GET['isim']) : $config[
                 
                 bar.style.width = pct.toFixed(1) + "%";
                 
-                const speed = (Math.random() * 8 + 4).toFixed(1);
-                const downloaded = ((pct / 100) * 12.5).toFixed(1);
+                const speed = (Math.random() * 12 + 6).toFixed(1); // 6 - 18 MB/s aralığında hızlı indirme
+                const downloadedKb = ((pct / 100) * parseFloat(file.size)).toFixed(1);
                 status.innerText = tr ? 
-                    `${downloaded} MB / 12.5 MB - ${speed} MB/sn` : 
-                    `${downloaded} MB / 12.5 MB - ${speed} MB/s`;
+                    `${downloadedKb} MB / ${file.size} - ${speed} MB/sn` : 
+                    `${downloadedKb} MB / ${file.size} - ${speed} MB/s`;
                 
                 if (pct < 100) {
                     window.requestAnimationFrame(step);
                 } else {
                     status.innerText = tr ? "Tamamlandı" : "Completed";
                     status.style.color = "#34a853";
+                    actions.innerHTML = `<button class="dl-btn">${tr ? "Klasörde göster" : "Show in folder"}</button>`;
                     actions.style.display = 'flex';
                 }
             }
