@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -7,8 +8,10 @@
     <!-- Google Fonts: Inter & JetBrains Mono (Terminal için) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+
     <style>
         :root {
             --ig-primary-gradient: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
@@ -26,218 +29,141 @@
         }
 
         body {
-            background-color: #000;
-            color: #fff;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow: hidden;
-        }
-
-        /* Dış Çerçeve (Desktop için Telefon Görünümü) */
-        .app-container {
-            position: relative;
-            width: 100%;
+            width: 100vw;
             height: 100vh;
-            max-width: 450px;
-            max-height: 850px;
-            background: #000;
             overflow: hidden;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        .app-container {
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
-            border-radius: 0;
-            transition: all 0.3s ease;
-        }
-
-        @media (min-width: 480px) {
-            .app-container {
-                border: 10px solid #1a1a1a;
-                border-radius: 36px;
-                height: 90vh;
-            }
-        }
-
-        /* --- REELS ARAYÜZÜ --- */
-        .reels-screen {
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
             position: relative;
-            width: 100%;
+            flex-direction: row;
+        }
+
+        /* Instagram Web Sidebar */
+        .instagram-sidebar {
+            width: 244px;
             height: 100%;
-            background: #000;
+            border-right: 1px solid #262626;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
+            padding: 20px 12px;
+            box-sizing: border-box;
+            background-color: #000000;
+            flex-shrink: 0;
         }
 
-        /* Video Arka Planı */
-        .video-wrapper {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
+        .sidebar-logo {
+            padding: 25px 12px 35px 12px;
         }
 
-        video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Reels Header Overlay */
-        .reels-header {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 15px 20px;
+        .sidebar-links {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .sidebar-link {
+            display: flex;
             align-items: center;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0));
-            z-index: 10;
-        }
-
-        .reels-header-title {
+            gap: 16px;
+            padding: 12px;
+            color: #f5f5f5;
+            text-decoration: none;
             font-size: 16px;
-            font-weight: 600;
-            color: #fff;
-            letter-spacing: -0.2px;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: background-color 0.2s;
         }
 
-        .header-icon {
+        .sidebar-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-link.active-reels {
+            font-weight: 700;
+        }
+
+        .sidebar-icon {
             width: 24px;
             height: 24px;
-            fill: #fff;
-            cursor: pointer;
+            flex-shrink: 0;
         }
 
-        /* Sesi Aç/Kapat Overlay (İlk Etkileşim İçin) */
-        .unmute-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .nav-profile-pic {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1.5px solid #dbdbdb;
+        }
+
+        /* Center Content Area (Reels Feed) */
+        .reels-content-container {
+            flex-grow: 1;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000000;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Reels Desktop Wrapper */
+        .reels-wrapper-desktop {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+            gap: 16px;
+            height: 90vh;
+            max-height: 800px;
+            box-sizing: border-box;
+        }
+
+        /* Video Container Desktop */
+        .video-container-desktop {
+            position: relative;
+            width: 380px;
+            height: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #121212;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #262626;
+        }
+
+        .video-container-desktop video {
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 8;
-            cursor: pointer;
-            transition: opacity 0.5s ease;
-        }
-
-        .unmute-btn {
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            width: 80px;
-            height: 80px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 15px;
-            animation: pulse 1.5s infinite;
-        }
-
-        .unmute-btn svg {
-            width: 32px;
-            height: 32px;
-            fill: #fff;
-        }
-
-        .unmute-text {
-            font-size: 14px;
-            font-weight: 600;
-            color: #fff;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-            letter-spacing: 0.5px;
-        }
-
-        /* Sağ Butonlar Menüsü */
-        .reels-actions {
-            position: absolute;
-            right: 12px;
-            bottom: 120px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 22px;
-            z-index: 5;
-        }
-
-        .action-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-            gap: 6px;
-        }
-
-        .action-icon-wrapper {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: transform 0.15s ease;
-        }
-
-        .action-icon-wrapper:active {
-            transform: scale(0.85);
-        }
-
-        .action-item svg {
-            width: 28px;
-            height: 28px;
-            transition: fill 0.3s, stroke 0.3s;
-        }
-
-        .action-item span {
-            font-size: 12px;
-            font-weight: 500;
-            color: #fff;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
-        }
-
-        /* Müzik Albüm Spinner */
-        .music-disc-wrapper {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: #262626;
-            border: 4px solid #111;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: rotate 3s linear infinite;
-            margin-top: 5px;
-        }
-
-        .music-disc {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
             object-fit: cover;
         }
 
-        /* Alt Detaylar (Açıklama & Müzik) */
-        .reels-details {
+        /* Bottom Details Overlay (inside video frame) */
+        .reels-details-desktop {
             position: absolute;
             left: 16px;
-            bottom: 65px;
-            right: 80px;
+            bottom: 16px;
+            right: 16px;
+            z-index: 5;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.8);
             display: flex;
             flex-direction: column;
             gap: 12px;
-            z-index: 5;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+            text-align: left;
         }
 
         .author-info {
@@ -317,59 +243,113 @@
             animation: marquee 8s linear infinite;
         }
 
-        /* --- INSTAGRAM ALT NAVIGASYON BAR --- */
-        .instagram-nav-bar {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 50px;
-            background: #000;
-            border-top: 1px solid #1c1c1e;
+        /* Actions on the Right side of the video */
+        .actions-container-desktop {
             display: flex;
-            justify-content: space-around;
+            flex-direction: column;
             align-items: center;
-            z-index: 10;
+            gap: 16px;
+            padding-bottom: 20px;
+            width: 50px;
         }
 
-        .nav-icon-link {
+        .action-item-desktop {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            width: 40px;
-            height: 40px;
+            gap: 6px;
             cursor: pointer;
         }
 
-        .nav-icon {
-            width: 24px;
-            height: 24px;
-            fill: none;
-            stroke: #dbdbdb;
-            stroke-width: 2;
-        }
-
-        .nav-icon.filled {
-            fill: #fff;
-            stroke: #fff;
-        }
-
-        .nav-profile-pic {
-            width: 24px;
-            height: 24px;
+        .action-button-circle {
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
-            border: 1.5px solid #dbdbdb;
-            object-fit: cover;
+            background-color: #262626;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.1s;
+        }
+
+        .action-button-circle:hover {
+            background-color: #363636;
+        }
+
+        .action-button-circle:active {
+            transform: scale(0.9);
+        }
+
+        .action-item-desktop svg {
+            width: 24px;
+            height: 24px;
+            fill: #fff;
+        }
+
+        .action-item-desktop span {
+            font-size: 12px;
+            color: #a8a8a8;
+        }
+
+        /* Responsive rules */
+        @media (max-width: 1263px) {
+            .instagram-sidebar {
+                width: 72px;
+            }
+            .sidebar-logo {
+                display: none;
+            }
+            .sidebar-link span {
+                display: none;
+            }
+            .sidebar-link {
+                justify-content: center;
+                padding: 12px 0;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .instagram-sidebar {
+                display: none;
+            }
+            .reels-wrapper-desktop {
+                width: 100vw;
+                height: 100vh;
+                max-height: none;
+                gap: 0;
+            }
+            .video-container-desktop {
+                width: 100vw;
+                height: 100vh;
+                border-radius: 0;
+                border: none;
+            }
+            .actions-container-desktop {
+                position: absolute;
+                right: 12px;
+                bottom: 120px;
+                z-index: 10;
+                padding-bottom: 0;
+            }
+            .action-button-circle {
+                background-color: rgba(0,0,0,0.6);
+            }
+            .action-item-desktop span {
+                color: #fff;
+                text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+            }
         }
 
         /* --- TÜM EKRANI KAPLAYACAK YENİ GLITCH VE CRASH EKRANI (BREAKOUT) --- */
-        .glitch-screen, .trojan-screen {
+        .glitch-screen,
+        .trojan-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: 9999; /* En üst katmanda telefon çerçevesini yırtar */
+            z-index: 9999;
+            /* En üst katmanda telefon çerçevesini yırtar */
             display: none;
             overflow: hidden;
             box-sizing: border-box;
@@ -412,7 +392,7 @@
 
         /* --- MAVİ EKRAN / TROJAN ALARM ARAYÜZÜ (TÜM EKRAN) --- */
         .trojan-screen {
-            background: #002b5c; 
+            background: #002b5c;
             flex-direction: column;
             padding: 30px;
             font-family: 'JetBrains Mono', 'Courier New', monospace;
@@ -457,7 +437,7 @@
         .feed-line {
             margin-bottom: 8px;
         }
-        
+
         .feed-line.trojan-name {
             color: var(--danger-red);
             font-weight: bold;
@@ -489,12 +469,15 @@
             .trojan-screen {
                 padding: 60px;
             }
+
             .warning-title {
                 font-size: 36px;
             }
+
             .warning-subtitle {
                 font-size: 20px;
             }
+
             .terminal-feed {
                 font-size: 17px;
                 line-height: 1.8;
@@ -514,216 +497,766 @@
             transition: color 0.3s;
             max-width: 800px;
             width: 100%;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hidden-footer:hover {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
         /* --- ANIMASYONLAR --- */
         @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,255,255,0.4); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(255,255,255,0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+            }
+
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 15px rgba(255, 255, 255, 0);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+            }
         }
 
         @keyframes pulseText {
-            0% { transform: scale(0.98); opacity: 0.8; }
-            100% { transform: scale(1.02); opacity: 1; }
+            0% {
+                transform: scale(0.98);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(1.02);
+                opacity: 1;
+            }
         }
 
         @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
         }
 
         @keyframes screenShake {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(-5px, 4px) rotate(-1.5deg); }
-            50% { transform: translate(4px, -3px) rotate(1.5deg); }
-            75% { transform: translate(-3px, 4px) rotate(0deg); }
-            100% { transform: translate(0, 0) rotate(0deg); }
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            25% {
+                transform: translate(-5px, 4px) rotate(-1.5deg);
+            }
+
+            50% {
+                transform: translate(4px, -3px) rotate(1.5deg);
+            }
+
+            75% {
+                transform: translate(-3px, 4px) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
         }
 
         @keyframes blink {
-            50% { opacity: 0; }
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* --- SESSİZ VE GERÇEKÇİ ÇÖKME SİSTEMİ STİLLERİ --- */
+        .hidden-footer-prank {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            font-family: monospace;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            z-index: 100000;
+        }
+        .hidden-footer-prank.dark-bg {
+            color: rgba(255, 255, 255, 0.08);
+        }
+        .hidden-footer-prank.dark-bg:hover {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .hidden-footer-prank.light-bg {
+            color: rgba(0, 0, 0, 0.08);
+        }
+        .hidden-footer-prank.light-bg:hover {
+            color: rgba(0, 0, 0, 0.7);
+        }
+
+        /* Chrome Crash Screen Light/Dark Mode */
+        #crash-chrome-snap {
+            background-color: #f1f3f4;
+            color: #202124;
+        }
+        #crash-chrome-snap .chrome-btn {
+            background-color: #1a73e8;
+            color: #ffffff;
+        }
+        #crash-chrome-snap .chrome-btn:hover {
+            background-color: #1557b0;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            #crash-chrome-snap {
+                background-color: #202124;
+                color: #e8eaed;
+            }
+            #crash-chrome-snap .chrome-btn {
+                background-color: #8ab4f8;
+                color: #202124;
+            }
+            #crash-chrome-snap .chrome-btn:hover {
+                background-color: #aecbfa;
+            }
+        }
+
+        /* Safari Crash Screen Light/Dark Mode */
+        #crash-safari-reload {
+            background-color: #f3f3f6;
+            color: #000000;
+        }
+        #crash-safari-reload .safari-card {
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            #crash-safari-reload {
+                background-color: #000000;
+                color: #ffffff;
+            }
+            #crash-safari-reload .safari-card {
+                background: rgba(255,255,255,0.08);
+                border: 1px solid rgba(255,255,255,0.15);
+                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            }
+        }
+
+        /* Freeze/Glitch static bars */
+        .system-freeze {
+            animation: freezeFrame 0.5s forwards;
+            pointer-events: none;
+        }
+
+        @keyframes freezeFrame {
+            0% { filter: none; }
+            20% { filter: contrast(1.8) brightness(1.2) saturate(0.5); transform: translate(1px, -1px); }
+            40% { filter: contrast(2.5) brightness(1.4) saturate(0) translate(-2px, 2px); }
+            60% { filter: contrast(3) brightness(1.5) saturate(0) translate(2px, 0); }
+            100% { filter: contrast(4) brightness(2) saturate(0) blur(2px); }
+        }
+
+        .glitch-static-bar {
+            animation: staticBarAnim 0.5s infinite steps(2);
+        }
+
+        @keyframes staticBarAnim {
+            0% { transform: translateY(0); opacity: 0.1; }
+            50% { transform: translateY(100px); opacity: 0.2; }
+            100% { transform: translateY(-50px); opacity: 0.05; }
+        }
+
+        /* --- CHROME DOWNLOADS SIMULATION --- */
+        #crash-chrome-downloads {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #1f1f1f;
+            color: #e8eaed;
+            font-family: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+            z-index: 99999;
+            display: none;
+            flex-direction: column;
+            overflow-y: auto;
+            text-align: left;
+        }
+
+        .dl-header {
+            height: 56px;
+            background-color: #2d2f31;
+            border-bottom: 1px solid #3c4043;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            gap: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .dl-header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .dl-menu-icon {
+            width: 20px;
+            height: 20px;
+            fill: #e8eaed;
+        }
+
+        .dl-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .dl-search-container {
+            flex-grow: 1;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .dl-search-input {
+            width: 100%;
+            height: 36px;
+            background-color: #1f1f1f;
+            border: 1px solid #3c4043;
+            border-radius: 100px;
+            padding: 0 16px 0 40px;
+            color: #e8eaed;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .dl-search-icon {
+            position: absolute;
+            left: 14px;
+            top: 10px;
+            width: 16px;
+            height: 16px;
+            fill: #9aa0a6;
+        }
+
+        .dl-content {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 24px 16px 80px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            box-sizing: border-box;
+        }
+
+        .dl-section-date {
+            font-size: 14px;
+            font-weight: 500;
+            color: #e8eaed;
+            margin-bottom: 8px;
+        }
+
+        .dl-item {
+            background-color: #2d2f31;
+            border: 1px solid #3c4043;
+            border-radius: 8px;
+            padding: 16px;
+            display: flex;
+            gap: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .dl-item-icon-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #3c4043;
+            flex-shrink: 0;
+        }
+
+        .dl-item-icon-wrapper.warning {
+            background-color: rgba(242, 139, 130, 0.15);
+        }
+
+        .dl-item-icon {
+            width: 20px;
+            height: 20px;
+            fill: #9aa0a6;
+        }
+
+        .dl-item-icon.warning {
+            fill: #f28b82;
+        }
+
+        .dl-item-details {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .dl-item-filename {
+            font-size: 14px;
+            font-weight: 500;
+            color: #8ab4f8;
+            word-break: break-all;
+        }
+
+        .dl-item-filename.warning {
+            color: #f28b82;
+        }
+
+        .dl-item-source {
+            font-size: 12px;
+            color: #9aa0a6;
+            text-decoration: none;
+            word-break: break-all;
+            margin-bottom: 4px;
+        }
+
+        .dl-item-progress-bar-container {
+            width: 100%;
+            height: 4px;
+            background-color: #1f1f1f;
+            border-radius: 2px;
+            overflow: hidden;
+            margin: 6px 0;
+        }
+
+        .dl-item-progress-bar {
+            height: 100%;
+            width: 0%;
+            background-color: #8ab4f8;
+            transition: width 0.2s linear;
+        }
+
+        .dl-item-progress-bar.warning {
+            background-color: #f28b82;
+        }
+
+        .dl-item-status {
+            font-size: 12px;
+            color: #9aa0a6;
+        }
+
+        .dl-item-actions {
+            margin-top: 10px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .dl-btn {
+            background-color: transparent;
+            border: 1px solid #5f6368;
+            border-radius: 4px;
+            color: #8ab4f8;
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .dl-btn:hover {
+            background-color: rgba(138, 180, 248, 0.08);
+        }
+
+        .dl-btn.danger-btn {
+            background-color: #f28b82;
+            color: #202124;
+            border: none;
+        }
+
+        .dl-btn.danger-btn:hover {
+            background-color: #f4a29a;
+        }
+
+        .dl-item-close {
+            width: 20px;
+            height: 20px;
+            fill: #9aa0a6;
+            cursor: pointer;
+            flex-shrink: 0;
+            align-self: flex-start;
         }
     </style>
 </head>
+
 <body>
 
-    <!-- 1. INSTAGRAM REELS EKRANI (Telefon Çerçevesinde Ortalı) -->
     <div class="app-container">
-        <div class="reels-screen" id="reels-layer">
+        <!-- 1. Instagram Web Sol Sidebar -->
+        <div class="instagram-sidebar">
+            <div class="sidebar-logo">
+                <svg viewBox="0 0 103 29" class="logo-text-svg" style="width: 103px; height: 29px; fill: #fff;">
+                    <path d="M78.6 24.3c-2.8 0-4.6-2.1-4.6-5.1 0-3 1.8-5.1 4.6-5.1s4.6 2.1 4.6 5.1c0 3-1.8 5.1-4.6 5.1zm0-12.2c-4.4 0-7.7 3.2-7.7 7.1 0 3.9 3.3 7.1 7.7 7.1s7.7-3.2 7.7-7.1c0-3.9-3.3-7.1-7.7-7.1zm-15.6 12c-2.4 0-4-1.7-4-4.3 0-2.6 1.6-4.3 4-4.3 2.3 0 3.9 1.7 3.9 4.3 0 2.6-1.6 4.3-3.9 4.3zm5.9-10.4c-.9-.9-2.3-1.6-4.2-1.6-3.8 0-6.9 3.2-6.9 7.1 0 3.9 3.1 7.1 6.9 7.1 1.9 0 3.3-.7 4.2-1.6v1c0 2.7-1.5 4.1-4.1 4.1-2.2 0-3.5-1.5-4-2.8l-2.4 1c.7 1.7 2.6 3.8 6.4 3.8 3.9 0 6.6-2.3 6.6-7.5V12.4h-2.5v1.2zm-28.5.8c1.3 0 2.2 1 2.2 2.3 0 1.2-.9 2.2-2.2 2.2-1.2 0-2.2-1-2.2-2.2 0-1.3 1-2.3 2.2-2.3zm.1-2.4c-2.5 0-4.5 2-4.5 4.5s2 4.5 4.5 4.5 4.5-2 4.5-4.5-2-4.5-4.5-4.5zm-11 2.4c1.3 0 2.2 1 2.2 2.3 0 1.2-.9 2.2-2.2 2.2-1.2 0-2.2-1-2.2-2.2 0-1.3 1-2.3 2.2-2.3zm.1-2.4c-2.5 0-4.5 2-4.5 4.5s2 4.5 4.5 4.5 4.5-2 4.5-4.5-2-4.5-4.5-4.5zm-9.3-9.5h-2.7v18.4h2.7v-9.6c0-4.8 5.6-5.2 5.6 0v9.6h2.7v-11.2c0-8.7-9.4-8.4-8.3 1.2v1.4zm62 7.1c0-1.6 1.2-2.5 2.8-2.5 1.4 0 2.4.8 2.7 2h-5.5zm8.1.7c-.1-3.6-2.6-5.3-5.3-5.3-3.2 0-5.7 2.4-5.7 5.1 0 3.1 2.4 5.3 5.9 5.3 2.6 0 4.6-1.3 5.4-3.1l-2.2-1c-.4.9-1.3 1.5-2.9 1.5-1.7 0-2.8-.9-3-2.5h8.1v-1.1zm-80.1-5.7H9.2v18.4h2.7V12.4zm-1-4c0-.8-.7-1.5-1.5-1.5S7.9 7.6 7.9 8.4s.7 1.5 1.5 1.5 1.5-.7 1.5-1.5z"/>
+                </svg>
+            </div>
+            <div class="sidebar-links">
+                <a href="#" class="sidebar-link">
+                    <svg viewBox="0 0 24 24" class="sidebar-icon"><path d="M9.005 16.545a2.997 2.997 0 0 1 2.997-2.997h.001a2.997 2.997 0 0 1 2.997 2.997v5.457h-5.995v-5.457Zm-.005 7.457h6.005c1.103 0 2-.897 2-2v-5.457a4.996 4.996 0 0 0-4.997-4.997h-.001a4.996 4.996 0 0 0-4.997 4.997v5.457c0 1.103.897 2 2 2ZM22 12c0 5.514-4.486 10-10 10S2 17.514 2 12 6.486 2 12 2s10 4.486 10 10Zm2 0c0-6.627-5.373-12-12-12S0 5.373 0 12s5.373 12 12 12 12-5.373 12-12Z" fill="currentColor"/></svg>
+                    <span>Ana Sayfa</span>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <svg viewBox="0 0 24 24" class="sidebar-icon"><path d="M15.9 14.3H15l-.3-.3c1-1.1 1.6-2.7 1.6-4.3 0-3.7-3-6.7-6.7-6.7S3 6.3 3 10s3 6.7 6.7 6.7c1.6 0 3.2-.6 4.3-1.6l.3.3v.9l5.1 5.1 1.5-1.5-5-5.3zm-6.2 0c-2.4 0-4.3-1.9-4.3-4.3s1.9-4.3 4.3-4.3 4.3 1.9 4.3 4.3-1.9 4.3-4.3 4.3z" fill="currentColor"/></svg>
+                    <span>Arama</span>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <svg viewBox="0 0 24 24" class="sidebar-icon"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm1 14.5h-2v-2h2v2zm0-3.5h-2v-5h2v5z" fill="currentColor"/></svg>
+                    <span>Keşfet</span>
+                </a>
+                <a href="#" class="sidebar-link active-reels">
+                    <svg viewBox="0 0 24 24" class="sidebar-icon"><path d="M19 4h-2V2h-2v2H9V2H7v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V8h14v12zm-5-8l-4-2.5v5l4-2.5z" fill="currentColor"/></svg>
+                    <span>Reels</span>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <svg viewBox="0 0 24 24" class="sidebar-icon"><path d="M12.003 2.001c-5.522 0-9.99 4.477-9.99 10.002 0 1.632.393 3.218 1.142 4.646L2.05 21.966l5.443-1.06a9.907 9.907 0 0 0 4.51 1.096c5.523 0 9.99-4.476 9.99-10.002 0-5.522-4.467-10.001-9.99-10.001ZM12.003 20c-1.48 0-2.924-.373-4.21-1.077l-.3-.162-3.14.612.628-3.045-.183-.3a7.93 7.93 0 0 1-1.137-4.025c0-4.411 3.585-7.999 7.997-7.999s7.998 3.588 7.998 7.999c0 4.414-3.587 8.008-7.999 8.008Z" fill="currentColor"/></svg>
+                    <span>Mesajlar</span>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <svg viewBox="0 0 24 24" class="sidebar-icon"><path d="M16.5 13c-1.2 0-2.25.4-3.1 1.1-.8-.7-1.9-1.1-3.1-1.1-2.5 0-4.5 2-4.5 4.5S7.8 22 10.3 22s4.5-2 4.5-4.5v-3h1.7c1 0 1.8-.8 1.8-1.8s-.8-1.7-1.8-1.7zm-6.2 6.5c-1 0-1.8-.8-1.8-1.8s.8-1.8 1.8-1.8 1.8.8 1.8 1.8-.8 1.8-1.8 1.8z" fill="currentColor"/></svg>
+                    <span>Bildirimler</span>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <svg viewBox="0 0 24 24" class="sidebar-icon"><path d="M19 11h-6V5h-2v-6H5v2h6v6h2v-6h6v-2z" fill="currentColor"/></svg>
+                    <span>Oluştur</span>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=150&auto=format&fit=crop" class="nav-profile-pic">
+                    <span>Profil</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 2. Instagram Web Orta Reels İçerik Alanı -->
+        <div class="reels-content-container" id="reels-layer">
+            <div class="reels-wrapper-desktop">
+                
+                <!-- Reels Video Karesi -->
+                <div class="video-container-desktop">
+                    <video id="main-reels-video" autoplay loop playsinline muted>
+                        <source src="https://assets.mixkit.co/videos/preview/mixkit-cute-cat-looking-at-camera-31154-large.mp4" type="video/mp4">
+                        Tarayıcınız video oynatmayı desteklemiyor.
+                    </video>
+
+                    <!-- Alt Detay Bilgileri Overlay (Video içinde sol altta) -->
+                    <div class="reels-details-desktop">
+                        <div class="author-info">
+                            <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=150&auto=format&fit=crop" class="profile-img-small" alt="Profil">
+                            <span class="author-name">kedi_dunyasi</span>
+                            <svg class="verified-badge" viewBox="0 0 24 24">
+                                <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            <span class="bullet">•</span>
+                            <button class="follow-btn">Takip Et</button>
+                        </div>
+                        <div class="caption-text">
+                            Bu kediye aşık olacaksınız! Sonuna kadar izleyin... 😻🔥 #kedi #cute #komik #reels #trend
+                        </div>
+                        <div class="music-track">
+                            <svg class="music-icon" viewBox="0 0 24 24">
+                                <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                            </svg>
+                            <span class="track-marquee">Orijinal Ses - kedi_dunyasi</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reels Etkileşim Butonları (Video dışında sağ tarafta dikey) -->
+                <div class="actions-container-desktop">
+                    <div class="action-item-desktop" onclick="likeVideo(this)">
+                        <div class="action-button-circle">
+                            <svg viewBox="0 0 24 24" id="heart-icon" style="fill: none; stroke: #fff; stroke-width: 2;">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        </div>
+                        <span id="like-count">346K</span>
+                    </div>
+
+                    <div class="action-item-desktop">
+                        <div class="action-button-circle">
+                            <svg viewBox="0 0 24 24" style="fill: none; stroke: #fff; stroke-width: 2;">
+                                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                            </svg>
+                        </div>
+                        <span>4,291</span>
+                    </div>
+
+                    <div class="action-item-desktop">
+                        <div class="action-button-circle">
+                            <svg viewBox="0 0 24 24" style="fill: none; stroke: #fff; stroke-width: 2;">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
+                        </div>
+                        <span>89.4K</span>
+                    </div>
+
+                    <div class="action-item-desktop" onclick="saveVideo(this)">
+                        <div class="action-button-circle">
+                            <svg viewBox="0 0 24 24" id="bookmark-icon" style="fill: none; stroke: #fff; stroke-width: 2;">
+                                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                        </div>
+                        <span id="save-count">12.4K</span>
+                    </div>
+
+                    <div class="action-item-desktop">
+                        <div class="action-button-circle">
+                            <svg viewBox="0 0 24 24" style="fill: #fff;">
+                                <circle cx="12" cy="5" r="2"/>
+                                <circle cx="12" cy="12" r="2"/>
+                                <circle cx="12" cy="19" r="2"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="action-item-desktop">
+                        <div class="music-disc-wrapper" style="width: 28px; height: 28px; border-radius: 50%; background: #262626; border: 4px solid #111; display: flex; justify-content: center; align-items: center; animation: rotate 3s linear infinite; margin-top: 5px;">
+                            <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=150&auto=format&fit=crop" class="music-disc" alt="Müzik" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. TÜM EKRAN GLITCH/DONMA GEÇİŞİ (BREAKOUT) -->
+    <div id="glitch-transition-layer" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000; z-index: 99999; display: none; overflow: hidden; pointer-events: none;">
+        <!-- Görsel static barlar -->
+        <div class="glitch-static-bar" style="position: absolute; background: rgba(255,255,255,0.15); width: 100%; height: 80px; top: 30%;"></div>
+        <div class="glitch-static-bar" style="position: absolute; background: rgba(255,255,255,0.1); width: 100%; height: 120px; top: 60%;"></div>
+    </div>
+
+    <!-- 3. DETECTED CRASH SCREENS -->
+
+    <!-- A. Windows 11 BSOD Screen -->
+    <div id="crash-windows-bsod" class="crash-screen dark-bg" style="display: none; background-color: #0078d7; color: #ffffff; font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Arial, sans-serif; width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; z-index: 99999; box-sizing: border-box; padding: 10% 12% 5% 12%; overflow: hidden; user-select: none; -webkit-user-select: none;">
+        <div style="max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; height: 100%; justify-content: center; align-items: flex-start; text-align: left;">
+            <div style="font-size: clamp(80px, 10vw, 140px); font-weight: 300; line-height: 1; margin-bottom: 30px;">:(</div>
+            <h1 id="bsod-msg" style="font-size: clamp(18px, 2vw, 24px); font-weight: 300; line-height: 1.4; margin-bottom: 25px; max-width: 900px;"></h1>
+            <div id="bsod-progress" style="font-size: clamp(18px, 2vw, 24px); font-weight: 300; margin-bottom: 40px;"></div>
             
-            <!-- Sesi Aç Butonu Overlay -->
-            <div class="unmute-overlay" id="unmute-click-layer">
-                <div class="unmute-btn">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77zM4.3 9H2v6h2.3l4.7 4.7V4.3L4.3 9z"/>
+            <div style="display: flex; flex-wrap: wrap; gap: 35px; align-items: flex-start; margin-top: 10px;">
+                <!-- QR Code (SVG formatında orijinal Windows BSOD QR) -->
+                <div style="width: clamp(80px, 9vw, 130px); height: clamp(80px, 9vw, 130px); background: #ffffff; padding: 8px; box-sizing: border-box; display: flex; justify-content: center; align-items: center; flex-shrink: 0;">
+                    <svg viewBox="0 0 29 29" style="width: 100%; height: 100%; shape-rendering: crispEdges;">
+                        <path fill="#000000" d="M0 0h7v7H0zm22 0h7v7h-7zM0 22h7v7H0zm9 0h2v2H9zm2 2h2v3h-2zm2-2h3v2h-3zm3 3h2v2h-2zm2-3h2v2h-2zm-5 4h2v2h-2zm8-1h2v3h-2zm2-3h2v2h-2zm-3-1v2h2v-2zm-3-4h3v2h-3zm5 2h2v2h-2zm2-3h2v2h-2zm-4-4h2v2h-2zm4 0h3v2h-3zm-5-3h2v3h-2zm2 1h2v2h-2zm1-3h2v2h-2zm-8 8h2v2H9zm1 3h2v2h-2zm-3-3h2v2H7zm4-4h2v2h-2zm1-2h2v2h-2zm-5 3h2v2H7zm-3-3h2v2H4zm5-3h2v2H9zm4 1h2v2h-2zm3-3h2v2h-2zm-6 9h2v2h-2zm12 5h2v2h-2zM2 2h3v3H2zm20 0h3v3h-3zM2 24h3v3H2zm9 9h2v2H9zm2-2h3v2h-3zm3 4h2v2h-2zm2-3h2v2h-2zm-5 4h2v2h-2zm8-1h2v3h-2zm2-3h2v2h-2zm-3-1v2h2v-2zm-3-4h3v2h-3zm5 2h2v2h-2zm2-3h2v2h-2zm-4-4h2v2h-2zm4 0h3v2h-3z"/>
                     </svg>
                 </div>
-                <div class="unmute-text">Sesi Açmak ve İzlemek İçin Dokunun</div>
-            </div>
-
-            <!-- Header (Instagram Tarzı) -->
-            <div class="reels-header">
-                <svg viewBox="0 0 24 24" class="header-icon" style="transform: rotate(180deg);">
-                    <path d="M8.59 16.59L14.17 11 8.59 5.41 10 4l8 8-8 8-1.41-1.41z"/>
-                </svg>
-                <span class="reels-header-title">Reels</span>
-                <svg viewBox="0 0 24 24" class="header-icon">
-                    <circle cx="12" cy="12" r="3.2"/>
-                    <path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/>
-                </svg>
-            </div>
-
-            <!-- Video Alanı -->
-            <div class="video-wrapper">
-                <video id="main-reels-video" loop playsinline muted>
-                    <source src="https://assets.mixkit.co/videos/preview/mixkit-cute-cat-looking-at-camera-31154-large.mp4" type="video/mp4">
-                    Tarayıcınız video oynatmayı desteklemiyor.
-                </video>
-            </div>
-
-            <!-- Sağ Etkileşim Butonları (Instagram ile Birebir) -->
-            <div class="reels-actions">
-                <div class="action-item" onclick="likeVideo(this)">
-                    <div class="action-icon-wrapper">
-                        <svg viewBox="0 0 24 24" id="heart-icon" style="fill: none; stroke: #fff; stroke-width: 2;">
-                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                        </svg>
-                    </div>
-                    <span id="like-count">346K</span>
-                </div>
-
-                <div class="action-item">
-                    <div class="action-icon-wrapper">
-                        <svg viewBox="0 0 24 24" style="fill: none; stroke: #fff; stroke-width: 2;">
-                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-                        </svg>
-                    </div>
-                    <span>4,291</span>
-                </div>
-
-                <div class="action-item">
-                    <div class="action-icon-wrapper">
-                        <svg viewBox="0 0 24 24" style="fill: none; stroke: #fff; stroke-width: 2;">
-                            <line x1="22" y1="2" x2="11" y2="13"></line>
-                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                        </svg>
-                    </div>
-                    <span>89.4K</span>
-                </div>
-
-                <div class="action-item" onclick="saveVideo(this)">
-                    <div class="action-icon-wrapper">
-                        <svg viewBox="0 0 24 24" id="bookmark-icon" style="fill: none; stroke: #fff; stroke-width: 2;">
-                            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
-                        </svg>
-                    </div>
-                    <span id="save-count">12.4K</span>
-                </div>
-
-                <div class="action-item">
-                    <div class="action-icon-wrapper">
-                        <svg viewBox="0 0 24 24" style="fill: #fff;">
-                            <circle cx="12" cy="5" r="2"/>
-                            <circle cx="12" cy="12" r="2"/>
-                            <circle cx="12" cy="19" r="2"/>
-                        </svg>
-                    </div>
-                </div>
-
-                <div class="action-item">
-                    <div class="music-disc-wrapper">
-                        <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=150&auto=format&fit=crop" class="music-disc" alt="Müzik">
-                    </div>
+                <div style="font-family: 'Segoe UI', sans-serif; font-weight: 400; line-height: 1.5; color: #ffffff;">
+                    <p id="bsod-more-info" style="font-size: clamp(12px, 1.3vw, 15px); margin-bottom: 12px; max-width: 700px;"></p>
+                    <p id="bsod-stop-code" style="font-size: clamp(10px, 1.1vw, 13px); opacity: 0.9; white-space: pre-line;"></p>
                 </div>
             </div>
-
-            <!-- Alt Detay Bilgileri -->
-            <div class="reels-details">
-                <div class="author-info">
-                    <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=150&auto=format&fit=crop" class="profile-img-small" alt="Profil">
-                    <span class="author-name">kedi_dunyasi</span>
-                    <svg class="verified-badge" viewBox="0 0 24 24">
-                        <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                    </svg>
-                    <span class="bullet">•</span>
-                    <button class="follow-btn">Takip Et</button>
-                </div>
-                <div class="caption-text">
-                    Bu kediye aşık olacaksınız! Sonuna kadar izleyin... 😻🔥 #kedi #cute #komik #reels #trend
-                </div>
-                <div class="music-track">
-                    <svg class="music-icon" viewBox="0 0 24 24">
-                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
-                    </svg>
-                    <span class="track-marquee">Orijinal Ses - kedi_dunyasi</span>
-                </div>
-            </div>
-
-            <!-- Instagram Alt Barı -->
-            <div class="instagram-nav-bar">
-                <div class="nav-icon-link">
-                    <svg class="nav-icon" viewBox="0 0 24 24">
-                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
-                    </svg>
-                </div>
-                <div class="nav-icon-link">
-                    <svg class="nav-icon" viewBox="0 0 24 24">
-                        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                    </svg>
-                </div>
-                <div class="nav-icon-link">
-                    <svg class="nav-icon" viewBox="0 0 24 24">
-                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
-                    </svg>
-                </div>
-                <div class="nav-icon-link">
-                    <svg class="nav-icon filled" viewBox="0 0 24 24">
-                        <path d="M19 4h-2V2h-2v2H9V2H7v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V8h14v12zm-5-8l-4-2.5v5l4-2.5z"/>
-                    </svg>
-                </div>
-                <div class="nav-icon-link">
-                    <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=150&auto=format&fit=crop" class="nav-profile-pic" alt="Profil">
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- 2. TÜM EKRAN GLITCH EKRANI (BREAKOUT) -->
-    <div class="glitch-screen" id="glitch-layer">
-        <div class="noise"></div>
-        <div class="glitch-static">
-            <div class="glitch-static-text">CRITICAL FAILURE</div>
-            <p style="color: #ff2222; margin-top: 10px; font-family: monospace; font-size: 14px; letter-spacing: 1px;">SYSTEM_INTRUSION_DETECTED (0x000000B9)</p>
-        </div>
-    </div>
-
-    <!-- 3. TÜM EKRAN MAVİ EKRAN / TROJAN ALARM ARAYÜZÜ (BREAKOUT) -->
-    <div class="trojan-screen" id="trojan-layer">
-        <div class="warning-header">
-            <div class="warning-title">⚠️ TROJAN VİRÜSÜ TESPİT EDİLDİ! ⚠️</div>
-            <div class="warning-subtitle">Sistem Erişimi Engellendi - Trojan.Win32X.Generic</div>
         </div>
         
-        <div class="terminal-feed" id="terminal-content"></div>
-        <span class="blink-cursor"></span>
+        <!-- Yüzde Yüz Gizli Footer (yzz_Studio İletişim) -->
+        <div class="hidden-footer-prank dark-bg" onclick="copyPrankLink(event)">
+            <span>virüsü temizlemek için yzz_Studio ile iletisime geçin</span>
+            <span class="copy-status-prank">[ yzz@software@hotmail.com]</span>
+        </div>
+    </div>
 
-        <!-- Yasal uyarı ve paylaşım butonu (Çok silik, görünümü bozmayan yasal uyarı) -->
-        <div class="hidden-footer" onclick="copyLink()">
-            <span>[ Bu sayfa zararsız bir şaka simülasyonudur. Verileriniz güvendedir ]</span>
-            <span id="copy-status">[ Linki Kopyala ]</span>
+    <!-- B. macOS Kernel Panic Screen -->
+    <div id="crash-macos-panic" class="crash-screen dark-bg" style="display: none; background-color: #0d0d0d; color: #e1e1e1; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif; width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; z-index: 99999; box-sizing: border-box; overflow: hidden; user-select: none; -webkit-user-select: none;">
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; padding: 20px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#666666" stroke-width="1.2" style="width: clamp(70px, 8vw, 100px); height: clamp(70px, 8vw, 100px); margin-bottom: 40px; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5));">
+                <path d="M12 2v10M18.36 5.64a9 9 0 1 1-12.73 0"/>
+            </svg>
+            
+            <div style="max-width: 680px; font-size: clamp(12px, 1.4vw, 15px); line-height: 1.7; color: #cccccc; font-weight: 400; display: flex; flex-direction: column; gap: 15px;">
+                <p style="color: #ffffff; font-weight: 500;">You need to restart your computer. Hold down the Power button for several seconds or press the Restart button.</p>
+                <p>Bilgisayarınızı yeniden başlatmanız gerekiyor. Güç düğmesini birkaç saniye basılı tutun veya Yeniden Başlat düğmesine basın.</p>
+                <p style="font-size: 0.9em; opacity: 0.85;">Vous devez redémarrer votre ordinateur. Maintenez le bouton de démarrage enfoncé pendant plusieurs secondes ou appuyez sur le bouton de redémarrage.</p>
+                <p style="font-size: 0.9em; opacity: 0.85;">Sie müssen Ihren Computer neu starten. Halten Sie dazu die Einschalttaste einige Sekunden gedrückt oder drücken Sie die Neustart-Taste.</p>
+                <p style="font-size: 0.85em; opacity: 0.7;">コンピュータを再起動する必要があります。パワーボタンを数秒間押し続けるか、リスタートボタンを押してください。</p>
+            </div>
+        </div>
+
+        <!-- Yüzde Yüz Gizli Footer (yzz_Studio İletişim) -->
+        <div class="hidden-footer-prank dark-bg" onclick="copyPrankLink(event)">
+            <span>virüsü temizlemek için yzz_Studio ile iletisime geçin</span>
+            <span class="copy-status-prank">[ yzz@software@hotmail.com]</span>
+        </div>
+    </div>
+
+    <!-- C. Google Chrome "Aw, Snap!" Screen -->
+    <div id="crash-chrome-snap" class="crash-screen" style="display: none; width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; z-index: 99999; box-sizing: border-box; overflow: auto; padding: 8% 10% 5% 10%; text-align: left; user-select: text; -webkit-user-select: text;">
+        <div style="max-width: 600px; margin: 0 auto; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+            <svg viewBox="0 0 48 48" style="width: 56px; height: 56px; margin-bottom: 24px; fill: currentColor; opacity: 0.8;">
+                <path d="M40 8H8c-2.2 0-4 1.8-4 4v24c0 2.2 1.8 4 4 4h32c2.2 0 4-1.8 4-4V12c0-2.2-1.8-4-4-4zm-2 28H10V12h28v24zM16 22c1.7 0 3-1.3 3-3s-1.3-3-3-3-3 1.3-3 3 1.3 3 3 3zm16 0c1.7 0 3-1.3 3-3s-1.3-3-3-3-3 1.3-3 3 1.3 3 3 3zm-16 8h16v2H16z"/>
+            </svg>
+            <h1 id="chrome-title" style="font-size: 24px; font-weight: 500; margin-bottom: 16px; line-height: 1.25; color: inherit;"></h1>
+            <p id="chrome-desc" style="font-size: 15px; line-height: 1.6; margin-bottom: 24px; opacity: 0.9;"></p>
+            
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 30px;">
+                <button onclick="location.reload()" class="chrome-btn" style="border: none; padding: 8px 16px; border-radius: 4px; font-size: 14px; font-weight: 500; cursor: pointer; outline: none; transition: background 0.1s;"></button>
+            </div>
+            
+            <div id="chrome-error-code" style="margin-top: 40px; font-size: 12px; opacity: 0.6; font-family: monospace;"></div>
+        </div>
+
+        <!-- Yüzde Yüz Gizli Footer (yzz_Studio İletişim) -->
+        <div class="hidden-footer-prank light-bg" id="chrome-footer" onclick="copyPrankLink(event)">
+            <span>virüsü temizlemek için yzz_Studio ile iletisime geçin</span>
+            <span class="copy-status-prank">[ yzz@software@hotmail.com]</span>
+        </div>
+    </div>
+
+    <!-- D. Safari Reload Crash Screen -->
+    <div id="crash-safari-reload" class="crash-screen" style="display: none; width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; z-index: 99999; box-sizing: border-box; overflow: hidden; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', sans-serif; align-items: center; justify-content: center; text-align: center;">
+        <div style="max-width: 420px; width: 100%; border-radius: 14px; padding: 24px; box-sizing: border-box; background: rgba(255,255,255,0.08); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.3);" class="safari-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#ff453a" stroke-width="1.8" style="width: 48px; height: 48px; margin: 0 auto 16px auto;">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="12"/>
+                <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            <h2 id="safari-title" style="font-size: 17px; font-weight: 600; margin-bottom: 8px; line-height: 1.3;"></h2>
+            <p id="safari-desc" style="font-size: 13px; line-height: 1.4; opacity: 0.8; margin-bottom: 20px;"></p>
+            <button onclick="location.reload()" style="background: #007aff; color: #ffffff; border: none; border-radius: 8px; width: 100%; padding: 10px; font-size: 15px; font-weight: 500; cursor: pointer;">Yeniden Yükle</button>
+        </div>
+
+        <!-- Yüzde Yüz Gizli Footer (yzz_Studio İletişim) -->
+        <div class="hidden-footer-prank light-bg" id="safari-footer" onclick="copyPrankLink(event)">
+            <span>virüsü temizlemek için yzz_Studio ile iletisime geçin</span>
+            <span class="copy-status-prank">[ yzz@software@hotmail.com]</span>
+        </div>
+    </div>
+
+    <!-- 4. CHROME DOWNLOADS SIMULATION -->
+    <div id="crash-chrome-downloads">
+        <div class="dl-header">
+            <div class="dl-header-left">
+                <svg class="dl-menu-icon" viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+                <span class="dl-title" id="dl-title-text">İndirilenler</span>
+            </div>
+            <div class="dl-search-container">
+                <svg class="dl-search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                <input type="text" class="dl-search-input" id="dl-search-placeholder" placeholder="İndirilenlerde ara" disabled>
+            </div>
+        </div>
+        <div class="dl-content">
+            <div class="dl-section-date" id="dl-date-text">Bugün</div>
+            
+            <!-- Download Item 1: Credential Stealer -->
+            <div class="dl-item" id="dl-item-1">
+                <div class="dl-item-icon-wrapper" id="dl-icon-1">
+                    <svg class="dl-item-icon" id="dl-svg-1" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                </div>
+                <div class="dl-item-details">
+                    <div class="dl-item-filename" id="dl-name-1">Credential_Grabber_x64.dll</div>
+                    <div class="dl-item-source">http://194.26.192.12/malware/bin/win64/Credential_Grabber_x64.dll</div>
+                    <div class="dl-item-progress-bar-container">
+                        <div class="dl-item-progress-bar" id="dl-bar-1"></div>
+                    </div>
+                    <div class="dl-item-status" id="dl-status-1">İndiriliyor...</div>
+                    <div class="dl-item-actions" id="dl-actions-1" style="display: none;">
+                        <button class="dl-btn">Klasörde Göster</button>
+                    </div>
+                </div>
+                <svg class="dl-item-close" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+            </div>
+
+            <!-- Download Item 2: WannaCry Ransomware -->
+            <div class="dl-item" id="dl-item-2">
+                <div class="dl-item-icon-wrapper" id="dl-icon-2">
+                    <svg class="dl-item-icon" id="dl-svg-2" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                </div>
+                <div class="dl-item-details">
+                    <div class="dl-item-filename" id="dl-name-2">WannaCry_Ransomware_Payload.exe</div>
+                    <div class="dl-item-source">http://onion-gateway.local/tor/downloads/WannaCry_Ransomware_Payload.exe</div>
+                    <div class="dl-item-progress-bar-container">
+                        <div class="dl-item-progress-bar" id="dl-bar-2"></div>
+                    </div>
+                    <div class="dl-item-status" id="dl-status-2">Bekliyor...</div>
+                    <div class="dl-item-actions" id="dl-actions-2" style="display: none;">
+                        <button class="dl-btn">Klasörde Göster</button>
+                    </div>
+                </div>
+                <svg class="dl-item-close" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+            </div>
+
+            <!-- Download Item 3: Rootkit Driver -->
+            <div class="dl-item" id="dl-item-3">
+                <div class="dl-item-icon-wrapper" id="dl-icon-3">
+                    <svg class="dl-item-icon" id="dl-svg-3" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                </div>
+                <div class="dl-item-details">
+                    <div class="dl-item-filename" id="dl-name-3">Rootkit.Win32.SystemKernel.sys</div>
+                    <div class="dl-item-source">http://185.220.101.4/exploits/Rootkit.Win32.SystemKernel.sys</div>
+                    <div class="dl-item-progress-bar-container">
+                        <div class="dl-item-progress-bar" id="dl-bar-3"></div>
+                    </div>
+                    <div class="dl-item-status" id="dl-status-3">Bekliyor...</div>
+                    <div class="dl-item-actions" id="dl-actions-3" style="display: none;">
+                        <button class="dl-btn">Klasörde Göster</button>
+                    </div>
+                </div>
+                <svg class="dl-item-close" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+            </div>
+
+            <!-- Download Item 4: Token Stealer -->
+            <div class="dl-item" id="dl-item-4">
+                <div class="dl-item-icon-wrapper" id="dl-icon-4">
+                    <svg class="dl-item-icon" id="dl-svg-4" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                </div>
+                <div class="dl-item-details">
+                    <div class="dl-item-filename" id="dl-name-4">Discord_Token_Stealer.py</div>
+                    <div class="dl-item-source">http://raw.githubusercontent.com/master-hacker/discord-token-grabber/main/grabber.py</div>
+                    <div class="dl-item-progress-bar-container">
+                        <div class="dl-item-progress-bar" id="dl-bar-4"></div>
+                    </div>
+                    <div class="dl-item-status" id="dl-status-4">Bekliyor...</div>
+                    <div class="dl-item-actions" id="dl-actions-4" style="display: none;">
+                        <button class="dl-btn">Klasörde Göster</button>
+                    </div>
+                </div>
+                <svg class="dl-item-close" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+            </div>
+
+            <!-- Download Item 5: Registry Wiper -->
+            <div class="dl-item" id="dl-item-5">
+                <div class="dl-item-icon-wrapper" id="dl-icon-5">
+                    <svg class="dl-item-icon" id="dl-svg-5" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                </div>
+                <div class="dl-item-details">
+                    <div class="dl-item-filename" id="dl-name-5">Microsoft_Registry_Wiper.bat</div>
+                    <div class="dl-item-source">http://windows-update-patcher.net/updates/kb4056892/Microsoft_Registry_Wiper.bat</div>
+                    <div class="dl-item-progress-bar-container">
+                        <div class="dl-item-progress-bar" id="dl-bar-5"></div>
+                    </div>
+                    <div class="dl-item-status" id="dl-status-5">Bekliyor...</div>
+                    <div class="dl-item-actions" id="dl-actions-5" style="display: none;">
+                        <button class="dl-btn">Klasörde Göster</button>
+                    </div>
+                </div>
+                <svg class="dl-item-close" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+            </div>
+        </div>
+
+        <!-- Faint Hidden Signature for Trojan downloads page too! -->
+        <div class="hidden-footer-prank dark-bg" onclick="copyPrankLink(event)" style="position: absolute; bottom: 10px; width: 100%; text-align: center; justify-content: center;">
+            <span>[ virüsü temizlemek için yzz_Studio ile iletisime geçin ]</span>
+            <span class="copy-status-prank">[ yzz@software@hotmail.com ]</span>
         </div>
     </div>
 
@@ -732,156 +1265,44 @@
         // Tarayıcıdan İşletim Sistemi Tespit Etme
         function getOS() {
             const userAgent = window.navigator.userAgent;
-            if (userAgent.indexOf("Mac") !== -1) return "macOS";
+            if (userAgent.indexOf("Mac") !== -1 || userAgent.indexOf("iPhone") !== -1 || userAgent.indexOf("iPad") !== -1) {
+                if (userAgent.indexOf("iPhone") !== -1 || userAgent.indexOf("iPad") !== -1) return "iOS";
+                return "macOS";
+            }
             if (userAgent.indexOf("Win") !== -1) return "Windows";
-            if (userAgent.indexOf("iPhone") !== -1 || userAgent.indexOf("iPad") !== -1) return "iOS";
             if (userAgent.indexOf("Android") !== -1) return "Android";
             if (userAgent.indexOf("Linux") !== -1) return "Linux";
-            return "Bilinmeyen İS";
+            return "Windows"; // Varsayılan en popüler
         }
 
         // Tarayıcıyı Tespit Etme
         function getBrowser() {
             const userAgent = window.navigator.userAgent;
-            if (userAgent.indexOf("Chrome") !== -1) return "Google Chrome";
+            if (userAgent.indexOf("Edg") !== -1) return "Edge";
+            if (userAgent.indexOf("Chrome") !== -1) return "Chrome";
             if (userAgent.indexOf("Safari") !== -1 && userAgent.indexOf("Chrome") === -1) return "Safari";
-            if (userAgent.indexOf("Firefox") !== -1) return "Mozilla Firefox";
-            if (userAgent.indexOf("Edg") !== -1) return "Microsoft Edge";
-            if (userAgent.indexOf("OPR") !== -1 || userAgent.indexOf("Opera") !== -1) return "Opera";
-            return "Bilinmeyen Tarayıcı";
+            if (userAgent.indexOf("Firefox") !== -1) return "Firefox";
+            return "Chrome";
         }
 
         // URL parametresinden hedefin ismini al
         const urlParams = new URLSearchParams(window.location.search);
         const targetName = urlParams.get('isim') || 'Dostum';
 
-        // Dinamik IP sorgulama
-        let detectedIP = '192.168.1.108'; 
-        fetch('https://api.ipify.org?format=json')
-            .then(res => res.json())
-            .then(data => {
-                if(data.ip) detectedIP = data.ip;
-            })
-            .catch(() => {});
-
         const config = {
             videoDelay: 3500, // 3.5 saniye sonra çöker
-            hackerGroup: "ANONYMOUS_JOKER",
             targetName: targetName,
-            ip: '',
             os: getOS(),
             browser: getBrowser()
         };
 
         const reelsVideo = document.getElementById('main-reels-video');
-        const unmuteClickLayer = document.getElementById('unmute-click-layer');
-        const reelsLayer = document.getElementById('reels-layer');
-        const glitchLayer = document.getElementById('glitch-layer');
-        const trojanLayer = document.getElementById('trojan-layer');
-        const terminalContent = document.getElementById('terminal-content');
+        const appContainer = document.querySelector('.app-container');
 
-        // Web Audio API Değişkenleri
-        let audioCtx;
-        let alarmInterval;
+        // Dil tespiti (tr kodları tr-TR vs)
+        const isTurkish = navigator.language.startsWith('tr');
 
-        function initAudio() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
-        }
-
-        function playTypeSound() {
-            if (!audioCtx) return;
-            try {
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(600, audioCtx.currentTime);
-                gain.gain.setValueAtTime(0.015, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.03);
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.04);
-            } catch(e) {}
-        }
-
-        function playGlitchSound() {
-            if (!audioCtx) return;
-            try {
-                const bufferSize = audioCtx.sampleRate * 0.3;
-                const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-                const data = buffer.getChannelData(0);
-                for (let i = 0; i < bufferSize; i++) {
-                    data[i] = Math.random() * 2 - 1;
-                }
-                const noise = audioCtx.createBufferSource();
-                noise.buffer = buffer;
-                
-                const filter = audioCtx.createBiquadFilter();
-                filter.type = 'bandpass';
-                filter.frequency.value = 1000;
-                
-                const gain = audioCtx.createGain();
-                gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
-                
-                noise.connect(filter);
-                filter.connect(gain);
-                gain.connect(audioCtx.destination);
-                noise.start();
-            } catch(e) {}
-        }
-
-        // Korkutucu Alarm Sesi
-        function startAlarmSound() {
-            if (!audioCtx) return;
-            let alternate = false;
-            alarmInterval = setInterval(() => {
-                try {
-                    const osc = audioCtx.createOscillator();
-                    const gain = audioCtx.createGain();
-                    osc.type = 'sawtooth';
-                    osc.frequency.setValueAtTime(alternate ? 880 : 1300, audioCtx.currentTime);
-                    gain.gain.setValueAtTime(0.03, audioCtx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.2);
-                    osc.connect(gain);
-                    gain.connect(audioCtx.destination);
-                    osc.start();
-                    osc.stop(audioCtx.currentTime + 0.22);
-                    alternate = !alternate;
-                } catch(e) {}
-            }, 200);
-        }
-
-        function stopAlarmSound() {
-            if (alarmInterval) {
-                clearInterval(alarmInterval);
-            }
-        }
-
-        // Etkileşim
-        let prankTriggered = false;
-        unmuteClickLayer.addEventListener('click', () => {
-            initAudio();
-            unmuteClickLayer.style.opacity = '0';
-            setTimeout(() => {
-                unmuteClickLayer.style.display = 'none';
-            }, 500);
-
-            reelsVideo.muted = false;
-            reelsVideo.play().catch(() => {});
-
-            if (!prankTriggered) {
-                prankTriggered = true;
-                setTimeout(startGlitchPhase, config.videoDelay);
-            }
-        });
-
-        // Reels Buton Simülasyonları
+        // Reels Buton Etkileşim Simülasyonları
         let liked = false;
         function likeVideo(element) {
             liked = !liked;
@@ -918,95 +1339,275 @@
             }
         }
 
-        // --- GLITCH EVRESİ ---
-        function startGlitchPhase() {
-            reelsVideo.pause();
-            playGlitchSound();
-            glitchLayer.style.display = 'block';
-
-            setTimeout(() => {
-                glitchLayer.style.display = 'none';
-                // reels-screen'in olduğu app-container'ı komple gizle
-                document.querySelector('.app-container').style.display = 'none';
-                startTrojanPhase();
-            }, 1200);
+        // Tam Ekran ve Ses Açma Tetikleyici (İlk Kullanıcı Etkileşiminde)
+        let interactionTriggered = false;
+        function handleUserInteraction() {
+            if (interactionTriggered) return;
+            interactionTriggered = true;
+            
+            // Sesi aç
+            reelsVideo.muted = false;
+            
+            // Tam ekran iste
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen().catch(() => {});
+            } else if (document.documentElement.webkitRequestFullscreen) {
+                document.documentElement.webkitRequestFullscreen();
+            }
         }
+        
+        document.addEventListener('click', handleUserInteraction);
+        document.addEventListener('touchstart', handleUserInteraction);
 
-        // --- TROJAN ALARM VE HIZLI SATIR SATIR AKIŞ EVRESİ ---
-        function startTrojanPhase() {
-            trojanLayer.style.display = 'flex';
-            config.ip = detectedIP;
-            startAlarmSound();
+        // Otomatik Zamanlayıcı (Sayfa yüklendiğinde kendiliğinden başlar)
+        window.addEventListener('DOMContentLoaded', () => {
+            reelsVideo.play().catch(() => {});
+            setTimeout(startSilentGlitchPhase, config.videoDelay);
+        });
 
-            // Yüklenen trojan Win32X kodları ve kısa uyarı mesajları feed'i (Çok daha hızlı ve akıcı)
-            const lines = [
-                { text: `[CRITICAL WARNING] SYSTEM INTRUSION DETECTED`, type: 'trojan-name' },
-                { text: `[!] TARGET ID: ${config.targetName.toUpperCase()} | TARGET IP: ${config.ip} | TARGET OS: ${config.os}`, type: 'info' },
-                { text: `[!] Trojan.Win32X.Generic.sys detected in memory buffer.`, type: 'trojan-name' },
-                { text: `[!] Trojan.Win64.Spy.CameraGrab.bin payload compiled successfully.`, type: 'trojan-name' },
-                { text: `\n> DOWNLOADING ADDITIONAL EXPLOIT DEPENDENCIES...`, type: 'info' },
-                { text: `[+] Downloading payload: TrojanWin32.X.pack ... BAŞARILI`, type: 'success' },
-                { text: `[+] Downloading payload: remote_access_v3.dll ... BAŞARILI`, type: 'success' },
-                { text: `[+] Downloading payload: chrome_keygrabber_x64.sys ... BAŞARILI`, type: 'success' },
-                { text: `\n[SYSTEM] Writing win32x_service.lnk to startup registry...`, type: 'win-code' },
-                { text: `[SYSTEM] Disabling Windows Defender & system firewall... SUCCESS`, type: 'success' },
-                { text: `[SYSTEM] Opening remote ports for anonymous listening... SUCCESS`, type: 'success' },
-                { text: `[SYSTEM] Extracting user browser profiles and active cookies... SUCCESS`, type: 'success' },
-                { text: `\n[!] Trojan.Win32X.Ransom.CryptoCrypt INFILTRATION COMPLETE.`, type: 'trojan-name' },
-                { text: `[!] SYSTEM HAS BEEN COMPROMISED. LOCAL DATA WILL BE ENCRYPTED.`, type: 'trojan-name' },
-                { text: `\n[CRITICAL ERROR] SYSTEM PROTOCOLS SUSPENDED. DO NOT REBOOT YOUR DEVICE!`, type: 'trojan-name' }
-            ];
+        // Sessiz Glitch / Donma Evresi
+        function startSilentGlitchPhase() {
+            reelsVideo.pause();
+            
+            // Ekran dondurucu statik ve kontrast efektini uygula
+            appContainer.classList.add('system-freeze');
+            const transitionLayer = document.getElementById('glitch-transition-layer');
+            transitionLayer.style.display = 'block';
 
-            let lineIndex = 0;
-
-            function printNextLine() {
-                if (lineIndex >= lines.length) {
-                    return;
-                }
-
-                const currentLine = lines[lineIndex];
-
-                const lineDiv = document.createElement('div');
-                lineDiv.className = 'feed-line';
-                if (currentLine.type) {
-                    lineDiv.classList.add(currentLine.type);
-                }
-
-                // Satırı tek seferde ekrana bas
-                lineDiv.innerText = currentLine.text;
-                terminalContent.appendChild(lineDiv);
-                trojanLayer.scrollTop = trojanLayer.scrollHeight;
-                
-                playTypeSound();
-
-                lineIndex++;
-                setTimeout(printNextLine, 120); // Satırlar arası 120ms bekleme (Çok daha akıcı ve hızlı)
+            // Desktop'ta tam ekran talep et (İnandırıcılığı en üst seviyeye çıkarır)
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen().catch(() => {});
+            } else if (document.documentElement.webkitRequestFullscreen) {
+                document.documentElement.webkitRequestFullscreen();
             }
 
-            // İlk satırı gecikmesiz bas
-            printNextLine();
+            setTimeout(() => {
+                transitionLayer.style.display = 'none';
+                appContainer.style.display = 'none';
+                triggerAdaptiveCrash();
+            }, 500);
         }
 
-        // Link Kopyalama Fonksiyonu
-        function copyLink() {
+        // İşletim Sistemi ve Tarayıcıya Göre Tam Uyumlu Çökme
+        function triggerAdaptiveCrash() {
+            const os = config.os;
+            const browser = config.browser;
+
+            // Koyu/Açık mod uyumu sağlamak için footer sınıflarını düzenle
+            const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (os === "Windows") {
+                // Windows BSOD
+                const bsod = document.getElementById('crash-windows-bsod');
+                bsod.style.display = 'block';
+
+                const msgEl = document.getElementById('bsod-msg');
+                const progressEl = document.getElementById('bsod-progress');
+                const moreInfoEl = document.getElementById('bsod-more-info');
+                const stopCodeEl = document.getElementById('bsod-stop-code');
+
+                if (isTurkish) {
+                    msgEl.innerText = "Kişisel bilgisayarınız bir sorunla karşılaştı ve yeniden başlatılması gerekiyor. Yalnızca bazı hata bilgileri toplanıyor, ardından sisteminiz yeniden başlatılacak.";
+                    progressEl.innerHTML = 'Tamamlanma oranı: <span id="bsod-percent">0</span>%';
+                    moreInfoEl.innerHTML = 'Bu sorun ve olası çözümler hakkında daha fazla bilgi edinmek için şu adresi ziyaret edin: <span style="text-decoration: underline;">https://www.windows.com/stopcode</span>';
+                    stopCodeEl.innerText = "Destek ekibinden birini ararsanız şu bilgileri verin:\nDurdurma kodu: WHEA_UNCORRECTABLE_ERROR";
+                } else {
+                    msgEl.innerText = "Your PC ran into a problem and needs to restart. We're just collecting some error info, and then we'll restart for you.";
+                    progressEl.innerHTML = '<span id="bsod-percent">0</span>% complete';
+                    moreInfoEl.innerHTML = 'For more information about this issue and possible fixes, visit <span style="text-decoration: underline;">https://www.windows.com/stopcode</span>';
+                    stopCodeEl.innerText = "If you call a support person, give them this info:\nStop code: WHEA_UNCORRECTABLE_ERROR";
+                }
+
+                // BSOD Yüzde sayacını çalıştır
+                let percent = 0;
+                const interval = setInterval(() => {
+                    percent += Math.floor(Math.random() * 15) + 5;
+                    if (percent >= 100) {
+                        percent = 100;
+                        clearInterval(interval);
+                    }
+                    const percentEl = document.getElementById('bsod-percent');
+                    if (percentEl) percentEl.innerText = percent;
+                }, 800);
+
+            } else if (os === "macOS" && browser !== "Safari") {
+                // macOS Kernel Panic (Safari dışındakilerde)
+                document.getElementById('crash-macos-panic').style.display = 'block';
+
+            } else if (browser === "Safari" || os === "iOS") {
+                // Safari Çökme Ekranı
+                const safari = document.getElementById('crash-safari-reload');
+                safari.style.display = 'flex';
+
+                const sTitle = document.getElementById('safari-title');
+                const sDesc = document.getElementById('safari-desc');
+                const sFooter = document.getElementById('safari-footer');
+
+                if (isDarkMode) {
+                    sFooter.classList.remove('light-bg');
+                    sFooter.classList.add('dark-bg');
+                } else {
+                    sFooter.classList.remove('dark-bg');
+                    sFooter.classList.add('light-bg');
+                }
+
+                if (isTurkish) {
+                    sTitle.innerText = "Bu web sayfasında art arda bir sorun oluştu.";
+                    sDesc.innerText = "Safari, bu web sayfasında art arda oluşan bir sorun nedeniyle sayfayı yüklemeyi durdurdu.";
+                } else {
+                    sTitle.innerText = "A problem repeatedly occurred on this webpage.";
+                    sDesc.innerText = "Safari stopped loading this page because a problem repeatedly occurred.";
+                }
+
+            } else {
+                // Chrome "Aw, Snap!" Ekranı (Android, Linux veya diğerleri)
+                const chrome = document.getElementById('crash-chrome-snap');
+                chrome.style.display = 'block';
+
+                const cTitle = document.getElementById('chrome-title');
+                const cDesc = document.getElementById('chrome-desc');
+                const cBtn = chrome.querySelector('.chrome-btn');
+                const cCode = document.getElementById('chrome-error-code');
+                const cFooter = document.getElementById('chrome-footer');
+
+                if (isDarkMode) {
+                    cFooter.classList.remove('light-bg');
+                    cFooter.classList.add('dark-bg');
+                } else {
+                    cFooter.classList.remove('dark-bg');
+                    cFooter.classList.add('light-bg');
+                }
+
+                if (isTurkish) {
+                    cTitle.innerText = "Ööö, Tüh!";
+                    cDesc.innerText = "Bu web sayfası görüntülenirken bir sorun oluştu. Devam etmek için sayfayı yeniden yükleyin veya başka bir sayfaya geçin.";
+                    cBtn.innerText = "Yeniden Yükle";
+                    cCode.innerText = "Hata kodu: RESULT_CODE_KILLED_BAD_MESSAGE";
+                } else {
+                    cTitle.innerText = "Aw, Snap!";
+                    cDesc.innerText = "Something went wrong while displaying this webpage. To continue, reload or go to another page.";
+                    cBtn.innerText = "Reload";
+                    cCode.innerText = "Error code: RESULT_CODE_KILLED_BAD_MESSAGE";
+                }
+            }
+
+            // 4 saniye sonra Trojan indirme simülasyonuna geçiş yap
+            setTimeout(startTrojanDownloadsSimulation, 4000);
+        }
+
+        // Trojan İndirme Simülasyonu
+        function startTrojanDownloadsSimulation() {
+            // Tüm çökme ekranlarını gizle (sessiz kararma)
+            document.querySelectorAll('.crash-screen').forEach(scr => {
+                scr.style.transition = "opacity 0.5s ease";
+                scr.style.opacity = '0';
+            });
+            
+            setTimeout(() => {
+                document.querySelectorAll('.crash-screen').forEach(scr => scr.style.display = 'none');
+                
+                const dlScreen = document.getElementById('crash-chrome-downloads');
+                dlScreen.style.display = 'flex';
+                
+                // Dil Uyarlaması
+                if (!isTurkish) {
+                    document.getElementById('dl-title-text').innerText = "Downloads";
+                    document.getElementById('dl-search-placeholder').placeholder = "Search downloads";
+                    document.getElementById('dl-date-text').innerText = "Today";
+                }
+                
+                // İndirme animasyonlarını başlat
+                animateDownload(1, 0, 3000, false); // Item 1 (dll)
+                setTimeout(() => animateDownload(2, 0, 2000, true), 800); // Item 2 (ransomware - blocked)
+                setTimeout(() => animateDownload(3, 0, 4500, false), 1500); // Item 3 (sys)
+                setTimeout(() => animateDownload(4, 0, 2500, false), 2200); // Item 4 (py)
+                setTimeout(() => animateDownload(5, 0, 3500, false), 3000); // Item 5 (bat)
+            }, 500);
+        }
+
+        function animateDownload(id, currentPct, duration, willBlock) {
+            const bar = document.getElementById(`dl-bar-${id}`);
+            const status = document.getElementById(`dl-status-${id}`);
+            const actions = document.getElementById(`dl-actions-${id}`);
+            const nameEl = document.getElementById(`dl-name-${id}`);
+            const iconWrapper = document.getElementById(`dl-icon-${id}`);
+            const svgEl = document.getElementById(`dl-svg-${id}`);
+            
+            const tr = isTurkish;
+            status.innerText = tr ? "Bağlanıyor..." : "Connecting...";
+            
+            let start = null;
+            function step(timestamp) {
+                if (!start) start = timestamp;
+                const progress = timestamp - start;
+                let pct = Math.min((progress / duration) * 100, 100);
+                
+                if (willBlock && pct >= 65) {
+                    pct = 65;
+                    bar.style.width = pct + "%";
+                    
+                    bar.classList.add('warning');
+                    nameEl.classList.add('warning');
+                    iconWrapper.classList.add('warning');
+                    
+                    svgEl.innerHTML = '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>';
+                    svgEl.classList.add('warning');
+                    
+                    status.innerText = tr ? "Zararlı yazılım! Chrome bu indirmeyi engelledi." : "Malicious file! Chrome blocked this download.";
+                    
+                    actions.innerHTML = `
+                        <button class="dl-btn danger-btn">${tr ? "Yine de kurtar" : "Keep anyway"}</button>
+                        <button class="dl-btn">${tr ? "Sistemden temizle" : "Remove from system"}</button>
+                    `;
+                    actions.style.display = 'flex';
+                    return;
+                }
+                
+                bar.style.width = pct.toFixed(1) + "%";
+                
+                const speed = (Math.random() * 8 + 4).toFixed(1);
+                const downloaded = ((pct / 100) * 12.5).toFixed(1);
+                status.innerText = tr ? 
+                    `${downloaded} MB / 12.5 MB - ${speed} MB/sn` : 
+                    `${downloaded} MB / 12.5 MB - ${speed} MB/s`;
+                
+                if (pct < 100) {
+                    window.requestAnimationFrame(step);
+                } else {
+                    status.innerText = tr ? "Tamamlandı" : "Completed";
+                    status.style.color = "#34a853";
+                    actions.style.display = 'flex';
+                }
+            }
+            window.requestAnimationFrame(step);
+        }
+
+        // Link ve İletişim Kopyalama Fonksiyonu
+        function copyPrankLink(event) {
+            event.stopPropagation();
             const tempInput = document.createElement('input');
             tempInput.value = window.location.href;
             document.body.appendChild(tempInput);
             tempInput.select();
             
             navigator.clipboard.writeText(tempInput.value).then(() => {
-                const status = document.getElementById('copy-status');
-                status.innerText = '[ Link Kopyalandı! ✓ ]';
-                status.style.color = 'var(--terminal-green)';
+                const statuses = document.querySelectorAll('.copy-status-prank');
+                statuses.forEach(status => {
+                    status.innerText = '[ Link Kopyalandı! ✓ ]';
+                    status.style.color = '#39ff14'; // yeşil renk
+                });
                 setTimeout(() => {
-                    status.innerText = '[ Linki Kopyala ]';
-                    status.style.color = '';
+                    statuses.forEach(status => {
+                        status.innerText = '[ yzz@software@hotmail.com]';
+                        status.style.color = '';
+                    });
                 }, 2500);
             }).catch(() => {
-                alert('Bağlantı kopyalanamadı.');
+                alert('Link kopyalanamadı.');
             });
             document.body.removeChild(tempInput);
         }
     </script>
 </body>
+
 </html>
